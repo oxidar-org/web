@@ -1,0 +1,23 @@
+languageCode = "es"
+languageName = "Español"
+languageDirection = "ltr"
+weight = 1
+
+title = "Oxidar.org"
+copyright = "Copy, _right?_ :thinking_face:"
+
+[params]
+homepage.layout = "profile"   # valid options: page, profile, custom
+dateFormat = "2 January 2006"
+colorScheme = "fire"
+
+[params.author]
+name = "Oxidar Group"
+# image = "img/author.jpg"
+headline = "Espacio Latinoamericano para la divulgación del lenguaje de programación Rust :crab:."
+# bio = "A little bit about you"
+links = [
+    { email = "mailto:admin@oxidar.org" },
+    { github = "https://github.com/oxidar-org" },
+    { linkedin = "https://www.linkedin.com/company/oxidar-org/" },
+]
