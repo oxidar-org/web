@@ -187,9 +187,6 @@ disclaimer = "Sumate a la comunidad!"
 enable = true
 # special amount of posts in each home posts page
 paginate = 6
-# LoveIt DELETED | 0.2.0 replaced with hiddenFromHomePage in params.page
-# default behavior when you don't set "hiddenFromHomePage" in front matter
-defaultHiddenFromHomePage = true
 
 # Social config about the author
 [params.social.LinkedIn]
@@ -284,7 +281,7 @@ RSS = true                 # LoveIt NEW | 0.2.0
 # LoveIt CHANGED | 0.2.0 Page global config
 [params.page]
 # LoveIt NEW | 0.2.0 whether to hide a page from home page
-hiddenFromHomePage = false
+hiddenFromHomePage = true
 # LoveIt NEW | 0.2.0 whether to hide a page from search results
 hiddenFromSearch = false
 # LoveIt NEW | 0.2.0 whether to enable twemoji
