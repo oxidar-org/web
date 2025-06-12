@@ -2,7 +2,7 @@
 date = '2025-04-03T14:30:00-03:00'
 draft = false
 hiddenFromHomePage = false
-title = 'Desplegando Rust en AWS Lambda con Cargo Lambda'
+title = 'Rust en AWS Lambda con Cargo Lambda'
 description = "Explora nuestro proyecto colaborativo sobre cómo usar Cargo Lambda para desplegar funciones Rust en AWS Lambda de manera eficiente"
 tags = ["rust", "aws", "lambda", "cargo-lambda", "serverless", "colaboracion"]
 categories = ["Proyectos", "Tutoriales"]
