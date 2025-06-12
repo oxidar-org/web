@@ -46,6 +46,24 @@ url = "/posts/"
 # title will be shown when you hover on this menu link
 title = ""
 
+[[menu.main]]
+weight = 2
+identifier = "about"
+pre = ""
+post = ""
+name = "Acerca de"
+url = "/about/"
+title = "Conoce más sobre Oxidar"
+
+[[menu.main]]
+weight = 3
+identifier = "contact"
+pre = ""
+post = ""
+name = "Contacto"
+url = "/posts/contact/"
+title = "Únete a la comunidad"
+
 [params]
 # site default theme ["auto", "light", "dark"]
 defaultTheme = "auto"

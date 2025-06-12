@@ -25,14 +25,14 @@ Creemos en una comunidad que:
 - Sea **accesible**, con recursos abiertos y gratuitos para aprender.
 - Promueva la **colaboración**, el intercambio de ideas y el apoyo mutuo.
 - Respete la **autonomía** de cada persona o grupo para impulsar sus propias iniciativas.
-- Sea **inclusiva**, donde todes se sientan bienvenides.
+- Sea **inclusiva**, donde cualquiera que quiera pueda participar.
 - Actúe con **transparencia**, compartiendo decisiones y manteniendo la comunicación abierta.
 
 ---
 
 ## Sobre el cuidado de la comunidad
 
-Oxidar adhiere a un **Código de Conducta** que pone en el centro el respeto, la inclusión y el trato justo entre todas las personas. No toleramos actitudes discriminatorias, abusivas o violentas, y nos comprometemos a construir espacios seguros y amigables para todes.
+Oxidar adhiere a un **Código de Conducta** que pone en el centro el respeto, la inclusión y el trato justo entre todas las personas. No toleramos actitudes discriminatorias, abusivas o violentas, y nos comprometemos a construir espacios seguros y amigables para todos.
 
 ---
 
@@ -42,4 +42,4 @@ Este estatuto no está escrito en piedra. Es una guía viva, que puede cambiar y
 
 ---
 
-**Bienvenide a Oxidar 🦀.**
+**Bienvenido a Oxidar 🦀.**
