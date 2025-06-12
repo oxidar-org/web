@@ -10,13 +10,15 @@ categories = ["Proyectos", "Eventos"]
 
 ## 🎯 ¡El 12 de junio es el gran día!
 
-La comunidad **Oxidar** está emocionada de presentar nuestro más reciente proyecto colaborativo: **[oxidar-wasm](https://github.com/oxidar-org/oxidar-wasm)**, una exploración práctica del poder de **Rust** combinado con **WebAssembly (WASM)**.
+**Rust Argentina** nos invita a participar de su meetup "Junio de WebAssembly!" donde presentaremos una exploración práctica del poder de **Rust** combinado con **WebAssembly (WASM)**.
 
 ---
 
-## 🚀 ¿Qué vamos a presentar?
+## 🚀 ¿Qué se va a presentar?
 
-Nuestro proyecto **oxidar-wasm** demuestra cómo integrar **Rust**, **JavaScript** y **WebAssembly** para crear aplicaciones web de alto rendimiento. Es una colaboración que ejemplifica perfectamente el espíritu de **Oxidar**: aprender haciendo y compartir conocimiento.
+**Tomás Kenda** presentará "Rust y WebAssembly", donde descubriremos cómo compilar Rust a WASM, los casos de uso reales, y por qué esta tecnología está cambiando la forma en que desarrollamos tanto en frontend como en backend.
+
+Además, se presentará oficialmente **Oxidar**, un grupo latinoamericano para la divulgación y colaboración en Rust.
 
 ### 🛠️ Stack tecnológico
 - **Rust** - El corazón de la lógica computacional
@@ -125,11 +127,14 @@ Este proyecto nació de la curiosidad colectiva de la comunidad **Oxidar** por e
 
 ---
 
-## 📅 Detalles de la presentación
+## 📅 Detalles del evento
 
-**¿Cuándo?** 12 de junio a las 18:00hs
-**¿Dónde?** En nuestro canal de [Telegram](https://t.me/+7PgAQVPclxIzOGQ0)
+**¿Cuándo?** Jueves 12 de junio a las 18:30hs (GMT-3)
+**¿Dónde?** LambdaClass, A. Carranza 1441, Buenos Aires, Argentina
+**¿Online?** También puedes unirte por [Google Meet](https://meet.google.com/vsd-rnqn-tyn)
 **¿Qué necesitas?** Solo ganas de aprender y experimentar
+
+*Organizado por [Rust Argentina](https://www.meetup.com/rust-argentina/events/307990465/) con bebidas, snacks y muy buena onda.*
 
 ---
 
@@ -165,7 +170,7 @@ WebAssembly está transformando lo que es posible en el navegador, y **Rust** es
 - **Comparte** tus ideas y experimentos
 - **Colabora** en futuras iteraciones del proyecto
 
-### **[📲 Únete al Telegram](https://t.me/+7PgAQVPclxIzOGQ0)** para no perderte la presentación
+### **[📅 Regístrate en Meetup](https://www.meetup.com/rust-argentina/events/307990465/)** para confirmar tu asistencia
 
 ---
 
@@ -173,10 +178,12 @@ WebAssembly está transformando lo que es posible en el navegador, y **Rust** es
 
 En **Oxidar** creemos que las mejores ideas surgen cuando combinamos **curiosidad**, **colaboración** y **código**. El proyecto **oxidar-wasm** es una muestra perfecta de lo que podemos lograr cuando exploramos juntos las fronteras de la tecnología.
 
-**¡Nos vemos el 12 de junio a las 18hs para esta emocionante presentación!**
+_No dejes de sumarte a Oxidar a nuestro canal de Telegram: [Telegram](https://t.me/+7PgAQVPclxIzOGQ0)._
+
+**¡Nos vemos el 12 de junio a las 18:30hs para este emocionante evento de Rust Argentina!**
 
 ---
 
-*¿Preguntas sobre WebAssembly? ¿Ideas para el proyecto? ¡Compártelas en nuestro [Telegram](https://t.me/+7PgAQVPclxIzOGQ0)!*
+*¿Preguntas sobre WebAssembly? ¡Únete al evento de [Rust Argentina](https://www.meetup.com/rust-argentina/events/307990465/) y participa de la discusión!*
 
 **🦀 Oxidar - Explorando el futuro de Rust en Latinoamérica**
