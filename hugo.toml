@@ -52,7 +52,7 @@ identifier = "about"
 pre = ""
 post = ""
 name = "Acerca de"
-url = "/posts/about/"
+url = "/about/"
 title = "Conoce más sobre Oxidar"
 
 [[menu.main]]
@@ -61,7 +61,7 @@ identifier = "contact"
 pre = ""
 post = ""
 name = "Contacto"
-url = "/posts/contact/"
+url = "/contact/"
 title = "Únete a la comunidad"
 
 [params]
@@ -215,11 +215,11 @@ title = "LinkedIn"
 [params.social]
 GitHub = "oxidar-org"
 # Linkedin = "oxidar-org"
-X = ""                     # LoveIt NEW | 0.3.1
-Twitter = ""               # LoveIt DEPRECATED | 0.3.1
+X = ""                         # LoveIt NEW | 0.3.1
+Twitter = ""                   # LoveIt DEPRECATED | 0.3.1
 Instagram = ""
 Facebook = ""
-Telegram = ""
+Telegram = "+7PgAQVPclxIzOGQ0"
 Medium = ""
 Gitlab = ""
 Youtubelegacy = ""
@@ -286,15 +286,15 @@ MediaWiki = ""
 Plume = ""
 HackTheBox = ""
 RootMe = ""
-Malt = ""                  # LoveIt NEW | 0.3.0
-TikTok = ""                # LoveIt NEW | 0.3.0
-TryHackMe = ""             # LoveIt NEW | 0.3.0
-Codeberg = ""              # LoveIt NEW | 0.3.0
-HuggingFace = ""           # LoveIt NEW | 0.3.1
-Threads = ""               # LoveIt NEW | 0.3.1
+Malt = ""                      # LoveIt NEW | 0.3.0
+TikTok = ""                    # LoveIt NEW | 0.3.0
+TryHackMe = ""                 # LoveIt NEW | 0.3.0
+Codeberg = ""                  # LoveIt NEW | 0.3.0
+HuggingFace = ""               # LoveIt NEW | 0.3.1
+Threads = ""                   # LoveIt NEW | 0.3.1
 Phone = ""
 Email = "admin@oxidar.org"
-RSS = true                 # LoveIt NEW | 0.2.0
+RSS = true                     # LoveIt NEW | 0.2.0
 
 # LoveIt CHANGED | 0.2.0 Page global config
 [params.page]
@@ -362,31 +362,31 @@ fullscreen = true
 # LoveIt CHANGED | 0.2.0 social share links in post page
 [params.page.share]
 enable = true
-X = true              # LoveIt NEW | 0.3.1
+X = false             # LoveIt NEW | 0.3.1
 Twitter = false       # LoveIt DEPRECATED | 0.3.1
-Threads = true        # LoveIt NEW | 0.3.1
-Facebook = true
+Threads = false       # LoveIt NEW | 0.3.1
+Facebook = false
 Linkedin = false
 Whatsapp = false
 Pinterest = false
 Tumblr = false
-HackerNews = true
-Reddit = false
+HackerNews = false
+Reddit = true
 VK = false
 Buffer = false
 Xing = false
-Line = true
+Line = false
 Instapaper = false
 Pocket = false
 Flipboard = false
-Weibo = true
+Weibo = false
 Blogger = false
 Baidu = false
 Odnoklassniki = false
 Evernote = false
 Skype = false
 Trello = false
-Diaspora = true       # LoveIt NEW | 0.3.1
+Diaspora = false      # LoveIt NEW | 0.3.1
 Mix = false
 Telegram = true       # LoveIt NEW | 0.3.1
 # LoveIt CHANGED | 0.2.0 Comment config
