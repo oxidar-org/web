@@ -1,7 +1,7 @@
 +++
 date = '2025-01-02T10:00:00-03:00'
 draft = false
-hiddenFromHomePage = false
+hiddenFromHomePage = true
 title = 'Contacto'
 description = "Únete a la comunidad Oxidar y conecta con otros desarrolladores Rust en Latinoamérica"
 +++

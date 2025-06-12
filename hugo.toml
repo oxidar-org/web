@@ -52,7 +52,7 @@ identifier = "about"
 pre = ""
 post = ""
 name = "Acerca de"
-url = "/about/"
+url = "/posts/about/"
 title = "Conoce más sobre Oxidar"
 
 [[menu.main]]

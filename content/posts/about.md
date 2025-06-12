@@ -1,7 +1,7 @@
 +++
 date = '2025-06-08T20:49:30-03:00'
 draft = false
-hiddenFromHomePage = false
+hiddenFromHomePage = true
 title = 'Acerca de Oxidar'
 description = "Conoce más sobre Oxidar"
 +++
