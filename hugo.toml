@@ -547,7 +547,7 @@ id = ""
 
 # LoveIt NEW | 0.2.7 Cookie consent config
 [params.cookieconsent]
-enable = true
+enable = false
 # text strings used for Cookie consent banner
 [params.cookieconsent.content]
 message = ""
