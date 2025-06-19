@@ -16,7 +16,7 @@ El pasado **12 de junio** presentamos con gran éxito nuestro proyecto colaborat
 
 ## 📹 Revive la presentación completa
 
-{{< youtube lH2Fnd7ryKY >}}
+{{< youtube OvRz1qx9l4o >}}
 
 ---
 
