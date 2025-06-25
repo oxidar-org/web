@@ -1,20 +1,35 @@
 +++
-date = '2025-06-24T14:30:00-03:00'
+date = '2025-04-03T14:30:00-03:00'
 draft = false
 hiddenFromHomePage = false
-title = 'Rust en AWS Lambda con Cargo Lambda - Presentacion completa'
-description = "Revive la presentacion del 3 de Abril sobre cómo usar Cargo Lambda para desplegar funciones Rust en AWS Lambda de manera eficiente"
-tags = ["rust", "aws", "lambda", "cargo-lambda", "serverless", "colaboracion", "video"]
-categories = ["Proyectos", "Eventos"]
+title = 'Rust en AWS Lambda con Cargo Lambda'
+description = "Explora nuestro proyecto colaborativo sobre cómo usar Cargo Lambda para desplegar funciones Rust en AWS Lambda de manera eficiente"
+tags = ["rust", "aws", "lambda", "cargo-lambda", "serverless", "colaboracion"]
+categories = ["Proyectos", "Tutoriales", "Eventos"]
 +++
 
-## 🎬 Presentación
+## 🚀 Una nueva colaboración de la comunidad
 
-El pasado **3 de abril** presentamos una exposición sobre cómo utilizar Rust en la nube de la mano de AWS y Cargo Lambda en el meetup de **Rust Argentina**.
+En **Oxidar** creemos en el poder del aprendizaje colaborativo. Por eso, nos complace compartir uno de nuestros proyectos más recientes: **[oxidar-lambdas](https://github.com/oxidar-org/oxidar-lambdas)**, una exploración práctica sobre cómo desplegar funciones **Rust** en **AWS Lambda** usando **Cargo Lambda**.
 
 ---
 
-## 📹 Revive la presentación completa
+## 🤔 ¿Qué es Cargo Lambda?
+
+**Cargo Lambda** es una herramienta que simplifica enormemente el desarrollo y despliegue de funciones Lambda escritas en Rust. Sin esta herramienta, tendrías que:
+
+- Configurar manualmente toolchains de cross-compilation
+- Manejar el empaquetado de binarios
+- Escribir scripts de despliegue personalizados
+- Lidiar con las complejidades del runtime de AWS Lambda
+
+Cargo Lambda elimina toda esta fricción y nos permite enfocarnos en escribir código Rust de calidad.
+
+---
+
+## 🎬 Presentación
+
+Presentamos una exposición sobre cómo utilizar Rust en la nube de la mano de AWS y Cargo Lambda en el meetup de **Rust Argentina**.
 
 {{< youtube IfWgf2Z_rSU >}}
 
@@ -42,97 +57,164 @@ Las slides incluyen:
 - Muestras del tracing obtenido con Open Telemetry
 - Link al repositorio con el código
 
----
 
-## 🌟 ¿Por qué Rust + AWS Lambdas funciona tan bien?
 
-Durante la presentación demostramos las ventajas técnicas clave:
+## 🛠️ Lo que construimos juntos
 
-### Performance demostrada
-- **Velocidad**: En el perceltil 99 la velocidad de respuesta es de 21ms con warm start
-- **Memoria**: 25 MB de uso de memoria constante
-- **Procesamiento**: 40 ms de uso de CPU
+Nuestro repositorio **oxidar-lambdas** incluye:
 
-### Casos de uso que exploramos
-- **Autenticación de endpoints REST con JWT** en tiempo real
-- **Modificación de permisos**
-- **Exploración de métricas precisas** de la mano de OpenTelemetry
+### Estructura del proyecto
+- **Múltiples funciones Lambda** en Rust
+- **Configuración de DynamoDB** local con Docker
+- **Scripts de testing** y despliegue automatizados
+- **Manejo de JWT** para autenticación
+- **Configuración de tracing** para observabilidad
 
----
-
-## 🎓 Lo que aprendimos juntos
-
-### Insights para desarrolladores Rust
-- Tooling para el desarrollo de AWS Lambdas con Rust
-- Cómo organizar un proyecto con varios AWS Lambda relacionados
-
-### Revelaciones para desarrolladores web
-- Cómo y por qué utilizar Rust para aplicaciones serverless
-- Pérformance y ahorro de recursos frente a otras alternativas más conocidas
-- Integración práctica en aplicaciones existentes
-- Tooling moderno que simplifica el desarrollo
+### Herramientas y tecnologías
+- **Rust** como lenguaje principal
+- **Cargo Lambda** para build y deploy
+- **AWS Lambda** como plataforma serverless
+- **DynamoDB** para persistencia
+- **Docker** para desarrollo local
+- **GitHub** para colaboración
 
 ---
 
-## 🤝 El impacto en la comunidad
+## 🎯 Comandos esenciales de Cargo Lambda
 
-La presentación generó un gran interés y participación:
-
-- **+55 asistentes** presenciales y online
-- **Preguntas técnicas** durante la sesión de Q&A
-- **Networking activo** entre desarrolladores Rust y web
-
----
-
-## 🛠️ Recursos para continuar aprendiendo
-
-Si quieres explorar el código presentado:
-
-### Acceso al proyecto
+### Instalación
 ```bash
-# Clonar el proyecto completo
-git@github.com:oxidar-org/oxidar-lambdas.git
-cd oxidar-lambdas
+# Con pip (requiere Python 3)
+pip3 install cargo-lambda
 
-# Seguir las instrucciones del README
+# Con Homebrew (macOS/Linux)
+brew tap cargo-lambda/cargo-lambda
+brew install cargo-lambda
+
+# Con Scoop (Windows)
+scoop bucket add cargo-lambda
+scoop install cargo-lambda/cargo-lambda
+```
+
+### Desarrollo local
+```bash
+# Crear un nuevo proyecto Lambda
+cargo lambda new mi-funcion
+
+# Build para producción
+cargo lambda build --release
+
+# Build para ARM64 (Graviton2)
+cargo lambda build --release --arm64
+
+# Servidor local para testing
+cargo lambda watch
+```
+
+### Testing y despliegue
+```bash
+# Invocar función localmente
+cargo lambda invoke --data-example apigw-request
+
+# Invocar con datos personalizados
+cargo lambda invoke --data-file ./data.json
+
+# Desplegar a AWS
+cargo lambda deploy mi-funcion
 ```
 
 ---
 
-## 📈 Métricas de la presentación
+## 💡 ¿Por qué Rust en Lambda?
 
-### Alcance del evento
-- **Asistentes presenciales**: 40 personas
-- **Participantes online**: 15+ conexiones simultáneas
-- **Visualizaciones del video**: Creciendo diariamente
+### Ventajas de usar Rust
+- **Performance**: Cold starts rápidos y ejecución eficiente
+- **Memory safety**: Sin preocupaciones por memory leaks
+- **Concurrencia**: Manejo excelente de operaciones asíncronas
+- **Ecosistema**: Crates robustos para AWS y desarrollo web
 
----
-
-## 🎉 Agradecimientos
-
-### A la comunidad Rust Argentina
-Gracias por el espacio, la organización impecable y la cálida recepción de **Oxidar**.
-
-### A LambdaClass
-Por hospedar el evento y proporcionar un ambiente perfecto para el aprendizaje colaborativo.
-
-### A todos los asistentes
-Sus preguntas, comentarios y entusiasmo hicieron de esta presentación una experiencia memorable.
+### Casos de uso ideales
+- **APIs de alta performance**
+- **Procesamiento de datos en tiempo real**
+- **Microservicios con baja latencia**
+- **Funciones de transformación de datos**
 
 ---
 
-## 🦀 El futuro es colaborativo
+## 🤝 El poder de la colaboración
 
-Esta presentación demostró que cuando combinamos **curiosidad técnica**, **colaboración comunitaria** y **código de calidad**, podemos explorar las fronteras de la tecnología de manera efectiva.
+Este proyecto fue posible gracias a la colaboración de varios miembros de **Oxidar**:
+
+- **[@nicoan](https://github.com/nicoan)** - Nicolás Antinori
+- **[@aleiton](https://github.com/aleiton)** - Alejandro Leiton
+
+Juntos exploramos diferentes aspectos:
+- Configuración de entornos de desarrollo
+- Patrones de manejo de errores en Lambda
+- Integración con servicios de AWS
+- Optimización de cold starts
+- Testing de funciones serverless
 
 ---
 
-## 📢 Mantente conectado
+## 🎓 Aprendizajes clave
 
-### Únete a la comunidad Oxidar:
-- **Telegram**: [Oxidar Community](https://t.me/+7PgAQVPclxIzOGQ0)
-- **GitHub**: [oxidar-org](https://github.com/oxidar-org)
+### 1. Simplificación del workflow
+Cargo Lambda reduce significativamente la curva de aprendizaje para desarrollar en Lambda con Rust.
+
+### 2. Desarrollo local eficiente
+El comando `cargo lambda watch` permite un ciclo de desarrollo rápido y cómodo.
+
+### 3. Compatibilidad con el ecosistema AWS
+La integración con herramientas como AWS SAM y CDK es fluida.
+
+### 4. Performance excepcional
+Las funciones Rust en Lambda ofrecen excelente rendimiento y eficiencia de memoria.
 
 ---
 
-*¿Te perdiste la presentación en vivo? No hay problema. El video completo está disponible arriba, las slides se pueden descargar, y el código está abierto para explorar. ¡La comunidad Rust en Latinoamérica está creciendo!*
+## 📚 Recursos adicionales
+
+- **[Repositorio del proyecto](https://github.com/oxidar-org/oxidar-lambdas)**
+- **[Documentación oficial de Cargo Lambda](https://www.cargo-lambda.info/)**
+- **[AWS Lambda Rust Runtime](https://github.com/awslabs/aws-lambda-rust-runtime)**
+- **[Guía de AWS sobre Rust en Lambda](https://docs.aws.amazon.com/lambda/latest/dg/rust-package.html)**
+
+---
+
+## 🔮 Próximos pasos
+
+Como comunidad, continuamos explorando:
+
+- **Integración con otros servicios de AWS**
+- **Patterns de arquitectura serverless**
+- **Optimización de costos en Lambda**
+- **Monitoring y observabilidad avanzada**
+
+---
+
+## 🙌 ¡Únete a nosotros!
+
+¿Te interesa contribuir a proyectos como este? ¡La comunidad **Oxidar** siempre está abierta a nuevos colaboradores!
+
+### Formas de participar:
+- **Explora el código** en nuestro repositorio
+- **Propón mejoras** a través de issues y PRs
+- **Comparte tu experiencia** con Rust y serverless
+- **Únete a nuestras discusiones** en [Telegram](https://t.me/+7PgAQVPclxIzOGQ0)
+
+---
+
+## 📝 Conclusión
+
+**oxidar-lambdas** es más que un proyecto técnico; es un ejemplo de cómo el conocimiento compartido y la colaboración pueden acelerar el aprendizaje de toda una comunidad.
+
+Rust y serverless computing son tecnologías que están transformando cómo construimos aplicaciones modernas. Con herramientas como **Cargo Lambda**, esa transformación está al alcance de cualquier desarrollador dispuesto a experimentar.
+
+¿Tienes experiencia con Rust en Lambda? ¿Preguntas sobre serverless? ¡Nos encantaría escuchar tu perspectiva!
+
+---
+
+**¡Gracias por hacer crecer la comunidad Rust en Latinoamérica! 🦀**
+
+*Para más proyectos y colaboraciones, visita nuestro [GitHub](https://github.com/oxidar-org) y únete a nuestra [comunidad](https://t.me/+7PgAQVPclxIzOGQ0).*
