@@ -182,12 +182,6 @@ La presentación marcó oficialmente el lanzamiento de **Oxidar** como espacio d
 - **Visualizaciones del video**: Creciendo diariamente
 - **Descargas de slides**: +100 en las primeras 48hs
 
-### Engagement de la comunidad
-- **GitHub stars** del proyecto: +50 nuevas
-- **Forks activos**: 12 desarrolladores explorando el código
-- **Issues abiertas**: Ideas y mejoras propuestas
-- **Miembros nuevos** en Telegram: +30
-
 ---
 
 ## 🎉 Agradecimientos
