@@ -5,7 +5,7 @@ hiddenFromHomePage = false
 title = 'Rust en AWS Lambda con Cargo Lambda'
 description = "Explora nuestro proyecto colaborativo sobre cómo usar Cargo Lambda para desplegar funciones Rust en AWS Lambda de manera eficiente"
 tags = ["rust", "aws", "lambda", "cargo-lambda", "serverless", "colaboracion"]
-categories = ["Proyectos", "Tutoriales"]
+categories = ["Proyectos", "Tutoriales", "Eventos"]
 +++
 
 ## 🚀 Una nueva colaboración de la comunidad
@@ -26,6 +26,38 @@ En **Oxidar** creemos en el poder del aprendizaje colaborativo. Por eso, nos com
 Cargo Lambda elimina toda esta fricción y nos permite enfocarnos en escribir código Rust de calidad.
 
 ---
+
+## 🎬 Presentación
+
+Presentamos una exposición sobre cómo utilizar Rust en la nube de la mano de AWS y Cargo Lambda en el meetup de **Rust Argentina**.
+
+{{< youtube IfWgf2Z_rSU >}}
+
+---
+
+## 🚀 Lo que presentamos
+
+**Nicolás Antinori** presentó "Creando un Lambda Authorizer en Rust con Cargo lambda", donde exploramos en detalle cómo utilizar Rust para crear funciones de AWS Lambda en un caso de uso real, qué herramientas existen y cómo utlizar Rust nos ayuda a ahorrar recursos, lo cuál se traduce en ahorro de dinero.
+
+### 🛠️ Stack tecnológico presentado
+- **Rust** - El lenguaje de programación utilizado.
+- **Cargo Lambda** - Herramienta CLI para la creación de funciones AWS Lambda en Rust.
+- **Amazon Web Services** - El proveedor cloud utilizado para el proyecto.
+
+---
+
+## 📊 Descargar las slides
+
+[**📋 Descargar slides de la presentación (PDF)**](slides.pdf)
+
+Las slides incluyen:
+- Qué es Cargo Lambda
+- Comandos básicos de Cargo Lambda
+- Performance del Authorizer creado
+- Muestras del tracing obtenido con Open Telemetry
+- Link al repositorio con el código
+
+
 
 ## 🛠️ Lo que construimos juntos
 
