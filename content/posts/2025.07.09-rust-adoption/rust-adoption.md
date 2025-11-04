@@ -25,7 +25,7 @@ En esta presentación, Alejandro Leiton nos da consejos prácticos y estrategias
 
 ## Descargar las slides
 
-[**📋 Descargar slides de la presentación (PDF)**](slides.pdf)
+[**📋 Descargar slides de la presentación (PDF)**](/slides/rust-adoption.pdf)
 
 Las slides incluyen:
 - Tooling existente en Rust.

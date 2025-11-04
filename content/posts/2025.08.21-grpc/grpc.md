@@ -23,7 +23,7 @@ En esta presentación, Alejandro Gonzalez nos guía a través de Protocol Buffer
 
 ## Descargar las slides
 
-[**📋 Descargar slides de la presentación (PDF)**](./slides.pdf)
+[**📋 Descargar slides de la presentación (PDF)**](/slides/grpc.pdf)
 
 Las slides incluyen:
 
