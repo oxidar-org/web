@@ -36,7 +36,7 @@ Además, se presentó oficialmente **Oxidar**, un grupo latinoamericano para la 
 
 ## 📊 Descargar las slides
 
-[**📋 Descargar slides de la presentación (PDF)**](slides.pdf)
+[**📋 Descargar slides de la presentación (PDF)**](/slides/wasm.pdf)
 
 Las slides incluyen:
 - Introducción completa a WebAssembly

@@ -48,7 +48,7 @@ Presentamos una exposición sobre cómo utilizar Rust en la nube de la mano de A
 
 ## 📊 Descargar las slides
 
-[**📋 Descargar slides de la presentación (PDF)**](slides.pdf)
+[**📋 Descargar slides de la presentación (PDF)**](/slides/cargo-lambda.pdf)
 
 Las slides incluyen:
 - Qué es Cargo Lambda
