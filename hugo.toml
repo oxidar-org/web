@@ -1,7 +1,7 @@
 baseURL = "https://oxidar.org/"
 
 # Change the default theme to be use when building the site with Hugo
-theme = "LoveIt"
+theme = "FixIt"
 
 # website title
 title = "Oxidar.org"
@@ -48,6 +48,16 @@ title = ""
 
 [[menu.main]]
 weight = 2
+identifier = "contributors"
+pre = ""
+post = ""
+name = "Colaboradores"
+url = "/contributors/"
+title = "Quienes han colaborado con Oxidar"
+
+
+[[menu.main]]
+weight = 3
 identifier = "about"
 pre = ""
 post = ""
@@ -56,7 +66,7 @@ url = "/about/"
 title = "Conoce más sobre Oxidar"
 
 [[menu.main]]
-weight = 3
+weight = 4
 identifier = "contact"
 pre = ""
 post = ""
