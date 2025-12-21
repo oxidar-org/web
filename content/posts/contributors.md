@@ -6,6 +6,18 @@ date: 2025-11-27
 Desarrolladores que han colaborado con artículos y presentaciones en Oxidar:
 
 <div style="display:flex; align-items:center; margin-bottom:20px;">
+  <img src="https://github.com/conectado.png" alt="Avatar Gabriel Steinberg" width="80" style="border-radius:50%; margin-right:15px;">
+  <div>
+    <strong>Gabriel Steinberg</strong><br>
+    <a href="https://github.com/conectado">GitHub</a><br>
+    <strong>Aportes:</strong>
+    <ul>
+      <li><a href="/async-patterns/">Async Rust: Compartiendo Memoria</a></li>
+    </ul>
+  </div>
+</div>
+
+<div style="display:flex; align-items:center; margin-bottom:20px;">
   <img src="https://github.com/mrgonza78.png" alt="Avatar Alejandro Gonzalez" width="80" style="border-radius:50%; margin-right:15px;">
   <div>
     <strong>Alejandro Gonzalez</strong><br>
