@@ -6,6 +6,7 @@ title = 'RustConf 2026: Call for Proposals abierto - Oxidar te acompaña'
 description = "El CFP de RustConf 2026 está abierto hasta el 16 de febrero. Desde Oxidar ofrecemos mentoría en español para ayudarte a preparar tu propuesta"
 tags = ["rustconf", "cfp", "conferencia", "comunidad", "mentoria", "rust-foundation"]
 categories = ["Eventos", "Comunidad"]
+translationKey = "rustconf-2026-cfp"
 +++
 
 ## 🎤 RustConf 2026: Tu voz puede estar en el escenario

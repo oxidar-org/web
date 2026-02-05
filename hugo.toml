@@ -6,12 +6,32 @@ theme = "FixIt"
 # website title
 title = "Oxidar.org"
 
-# language code ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "es"
-# language name ["English", "简体中文", "Français", "Polski", ...]
-languageName = "Español"
+# Multilingual setup
+defaultContentLanguage = "es"
+defaultContentLanguageInSubdir = false  # Spanish at root URL
+
 # whether to include Chinese/Japanese/Korean
 hasCJKLanguage = false
+
+# =============================================================================
+# Languages Configuration
+# =============================================================================
+[languages]
+  [languages.es]
+    languageCode = "es"
+    languageName = "Español"
+    weight = 1
+    title = "Oxidar.org"
+    [languages.es.params]
+      description = "Espacio Latinoamericano para la divulgación de Rust"
+
+  [languages.en]
+    languageCode = "en"
+    languageName = "English"
+    weight = 2
+    title = "Oxidar.org"
+    [languages.en.params]
+      description = "Latin American space for Rust programming language"
 
 # copyright description used only for seo schema
 copyright = ""
@@ -32,47 +52,67 @@ disableAliases = false
 pagerSize = 10
 path = "page"
 
-# Menu config
-[menu]
-[[menu.main]]
+# =============================================================================
+# Menu Configuration (per language)
+# =============================================================================
+
+# Spanish Menu
+[[languages.es.menu.main]]
 weight = 1
 identifier = "posts"
-# you can add extra information before the name (HTML format is supported), such as icons
-pre = ""
-# you can add extra information after the name (HTML format is supported), such as icons
-post = ""
 name = "Posts"
 url = "/posts/"
-# title will be shown when you hover on this menu link
 title = ""
 
-[[menu.main]]
+[[languages.es.menu.main]]
 weight = 2
 identifier = "contributors"
-pre = ""
-post = ""
 name = "Colaboradores"
 url = "/contributors/"
 title = "Quienes han colaborado con Oxidar"
 
-
-[[menu.main]]
+[[languages.es.menu.main]]
 weight = 3
 identifier = "about"
-pre = ""
-post = ""
 name = "Acerca de"
 url = "/about/"
 title = "Conoce más sobre Oxidar"
 
-[[menu.main]]
+[[languages.es.menu.main]]
 weight = 4
 identifier = "contact"
-pre = ""
-post = ""
 name = "Contacto"
 url = "/contact/"
 title = "Únete a la comunidad"
+
+# English Menu
+[[languages.en.menu.main]]
+weight = 1
+identifier = "posts"
+name = "Posts"
+url = "/en/posts/"
+title = ""
+
+[[languages.en.menu.main]]
+weight = 2
+identifier = "contributors"
+name = "Contributors"
+url = "/en/contributors/"
+title = "People who have contributed to Oxidar"
+
+[[languages.en.menu.main]]
+weight = 3
+identifier = "about"
+name = "About"
+url = "/en/about/"
+title = "Learn more about Oxidar"
+
+[[languages.en.menu.main]]
+weight = 4
+identifier = "contact"
+name = "Contact"
+url = "/en/contact/"
+title = "Join the community"
 
 [params]
 # site default theme ["auto", "light", "dark"]
@@ -616,9 +656,8 @@ filename = "sitemap.xml"
 priority = 0.5
 
 # Permalinks config
-[Permalinks]
-# posts = ":year/:month/:filename"
-posts = ":filename"
+[permalinks]
+posts = ":contentbasename"
 
 # Privacy config
 [privacy]

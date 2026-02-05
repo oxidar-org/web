@@ -6,6 +6,7 @@ title = 'gRPC en Rust'
 description = "Revive la presentación del 21 de agosto sobre cómo utilizar gRPC en Rust"
 tags = ["rust", "grpc", "protobuf", "protocol-buffers", "tonic", "prost", "presentacion", "video"]
 categories = ["Proyectos", "Eventos"]
+translationKey = "grpc"
 +++
 
 # gRPC en Rust: Protocol Buffers y Framework de Alto Rendimiento

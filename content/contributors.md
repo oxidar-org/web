@@ -1,6 +1,7 @@
 ---
 title: "Colaboradores"
 date: 2025-11-27
+translationKey: "contributors"
 ---
 
 Desarrolladores que han colaborado con artículos y presentaciones en Oxidar:

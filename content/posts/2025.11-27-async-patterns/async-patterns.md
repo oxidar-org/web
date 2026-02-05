@@ -6,6 +6,7 @@ title = 'Async Rust: Compartiendo Memoria'
 description = 'Cómo manejar memoria compartida en Async Rust, comparando distintos enfoques y resaltando la importancia de elegir el modelo adecuado según las necesidades de concurrencia y paralelismo'
 tags = ["rust", "async", "await", "concurrencia", "runtimes", "presentacion", "video"]
 categories = ["Proyectos", "Eventos"]
+translationKey = "async-patterns"
 +++
 
 # Async Rust: Compartiendo Memoria
