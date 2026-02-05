@@ -6,6 +6,7 @@ title = 'Async/Await a fondo'
 description = 'Una guía práctica para entender qué hace el compilador de Rust cuando usamos async/await, y cómo escribir un runtime asincrónico desde cero.'
 tags = ["rust", "async", "await", "concurrencia", "runtimes", "presentacion", "video"]
 categories = ["Proyectos", "Eventos"]
+translationKey = "async"
 +++
 
 # Async a fondo: Cómo funciona async/await en Rust desde cero

@@ -6,6 +6,7 @@ title = 'Tips para Rust en entornos empresariales'
 description = "Consejos prácticos y estrategias para adoptar Rust en empresas."
 tags = ["rust", "comunidad", "adopcion", "colaboracion"]
 categories = ["Eventos"]
+translationKey = "rust-adoption"
 +++
 
 # Rust en la industria: Correctitud, Adopción y Comunidad

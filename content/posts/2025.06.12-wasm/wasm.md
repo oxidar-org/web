@@ -6,6 +6,7 @@ title = 'Rust + WebAssembly en acción - Presentación completa'
 description = "Revive la presentación del 12 de junio sobre nuestro proyecto colaborativo que combina Rust, JavaScript y WebAssembly"
 tags = ["rust", "webassembly", "wasm", "javascript", "wasm-pack", "presentacion", "video"]
 categories = ["Proyectos", "Eventos"]
+translationKey = "wasm"
 +++
 
 ## 🎬 ¡Presentación completada con éxito!

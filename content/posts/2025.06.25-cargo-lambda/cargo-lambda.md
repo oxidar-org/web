@@ -6,6 +6,7 @@ title = 'Rust en AWS Lambda con Cargo Lambda'
 description = "Explora nuestro proyecto colaborativo sobre cómo usar Cargo Lambda para desplegar funciones Rust en AWS Lambda de manera eficiente"
 tags = ["rust", "aws", "lambda", "cargo-lambda", "serverless", "colaboracion"]
 categories = ["Proyectos", "Tutoriales", "Eventos"]
+translationKey = "cargo-lambda"
 +++
 
 ## 🚀 Una nueva colaboración de la comunidad

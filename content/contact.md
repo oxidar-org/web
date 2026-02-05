@@ -4,6 +4,7 @@ draft = false
 hiddenFromHomePage = true
 title = 'Contacto'
 description = "Únete a la comunidad Oxidar y conecta con otros desarrolladores Rust en Latinoamérica"
+translationKey = "contact"
 +++
 
 ## ¡Únete a la comunidad Oxidar! 🦀
