@@ -2,6 +2,7 @@
 date = '2025-06-25T17:33:02-03:00'
 draft = false
 title = 'Condiciones para disertar'
+translationKey = "speaker-guidelines"
 +++
 
 Gracias por tu interés en dar una charla en nuestro espacio. Para garantizar una experiencia coherente, abierta y de calidad para todos los asistentes, te pedimos que tengas en cuenta las siguientes condiciones:

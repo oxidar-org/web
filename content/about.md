@@ -4,6 +4,7 @@ draft = false
 hiddenFromHomePage = true
 title = 'Acerca de Oxidar'
 description = "Conoce más sobre Oxidar"
+translationKey = "about"
 +++
 
 
