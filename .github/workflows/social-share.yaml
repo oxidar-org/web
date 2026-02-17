@@ -33,7 +33,7 @@ jobs:
       - name: Detect new posts
         id: detect
         run: |
-          NEW_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'content/posts/**/*.md' || true)
+          NEW_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'content/posts/' | grep '\.md$' || true)
           # Filter out English translations and index files
           POSTS=$(echo "$NEW_FILES" | grep -v '\.en\.md$' | grep -v '_index\.md' | grep -v '^$' || true)
           if [ -z "$POSTS" ]; then

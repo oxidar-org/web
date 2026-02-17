@@ -8,6 +8,22 @@ from .base import Platform
 
 
 class TwitterPlatform(Platform):
+    def __init__(self):
+        self._api_key = os.environ.get("TWITTER_API_KEY")
+        self._api_secret = os.environ.get("TWITTER_API_SECRET")
+        self._access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
+        self._access_secret = os.environ.get("TWITTER_ACCESS_SECRET")
+        missing = [
+            name for name, val in [
+                ("TWITTER_API_KEY", self._api_key),
+                ("TWITTER_API_SECRET", self._api_secret),
+                ("TWITTER_ACCESS_TOKEN", self._access_token),
+                ("TWITTER_ACCESS_SECRET", self._access_secret),
+            ] if not val
+        ]
+        if missing:
+            raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
+
     @property
     def name(self) -> str:
         return "twitter"
@@ -15,10 +31,10 @@ class TwitterPlatform(Platform):
     def publish(self, text: str, post: dict) -> dict:
         try:
             client = tweepy.Client(
-                consumer_key=os.environ["TWITTER_API_KEY"],
-                consumer_secret=os.environ["TWITTER_API_SECRET"],
-                access_token=os.environ["TWITTER_ACCESS_TOKEN"],
-                access_token_secret=os.environ["TWITTER_ACCESS_SECRET"],
+                consumer_key=self._api_key,
+                consumer_secret=self._api_secret,
+                access_token=self._access_token,
+                access_token_secret=self._access_secret,
             )
             response = client.create_tweet(text=text)
             tweet_id = response.data["id"]
@@ -26,5 +42,5 @@ class TwitterPlatform(Platform):
                 "success": True,
                 "url": f"https://x.com/i/status/{tweet_id}",
             }
-        except Exception as e:
+        except tweepy.TweepyException as e:
             return {"success": False, "error": str(e)}

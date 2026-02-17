@@ -8,22 +8,31 @@ from .base import Platform
 
 
 class LinkedInPlatform(Platform):
+    def __init__(self):
+        self._access_token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
+        self._org_id = os.environ.get("LINKEDIN_ORG_ID")
+        missing = [
+            name for name, val in [
+                ("LINKEDIN_ACCESS_TOKEN", self._access_token),
+                ("LINKEDIN_ORG_ID", self._org_id),
+            ] if not val
+        ]
+        if missing:
+            raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
+
     @property
     def name(self) -> str:
         return "linkedin"
 
     def publish(self, text: str, post: dict) -> dict:
-        access_token = os.environ["LINKEDIN_ACCESS_TOKEN"]
-        org_id = os.environ["LINKEDIN_ORG_ID"]
-
         url = "https://api.linkedin.com/v2/ugcPosts"
         headers = {
-            "Authorization": f"Bearer {access_token}",
+            "Authorization": f"Bearer {self._access_token}",
             "Content-Type": "application/json",
             "X-Restli-Protocol-Version": "2.0.0",
         }
         payload = {
-            "author": f"urn:li:organization:{org_id}",
+            "author": f"urn:li:organization:{self._org_id}",
             "lifecycleState": "PUBLISHED",
             "specificContent": {
                 "com.linkedin.ugc.ShareContent": {
@@ -44,10 +53,14 @@ class LinkedInPlatform(Platform):
             },
         }
 
-        resp = requests.post(url, headers=headers, json=payload, timeout=30)
+        try:
+            resp = requests.post(url, headers=headers, json=payload, timeout=30)
+        except requests.RequestException as e:
+            return {"success": False, "error": str(e)}
+
         if resp.status_code == 201:
             post_id = resp.json().get("id", "")
-            return {"success": True, "id": post_id}
+            return {"success": True, "url": post_id}
         else:
             return {
                 "success": False,

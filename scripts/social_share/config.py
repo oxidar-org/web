@@ -12,7 +12,7 @@ def load_config(config_path: str) -> dict:
     if not path.exists():
         raise FileNotFoundError(f"Config file not found: {config_path}")
     with open(path) as f:
-        return yaml.safe_load(f)
+        return yaml.safe_load(f) or {}
 
 
 def get_ai_provider_name() -> str:
