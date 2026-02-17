@@ -12,6 +12,10 @@ try:
 except ModuleNotFoundError:
     import tomli as tomllib  # type: ignore[no-redef]
 
+BODY_EXCERPT_MAX_CHARS = 2000
+ENGLISH_TRANSLATION_SUFFIX = ".en.md"
+INDEX_FILE_PREFIX = "_"
+
 
 def get_new_post_files(repo_root: str | None = None) -> list[str]:
     """Get list of newly added markdown files in content/posts/ from git diff."""
@@ -35,9 +39,9 @@ def filter_post_files(files: list[str]) -> list[str]:
     filtered = []
     for f in files:
         basename = Path(f).name
-        if basename.startswith("_"):
+        if basename.startswith(INDEX_FILE_PREFIX):
             continue
-        if basename.endswith(".en.md"):
+        if basename.endswith(ENGLISH_TRANSLATION_SUFFIX):
             continue
         filtered.append(f)
     return filtered
@@ -138,8 +142,7 @@ def detect_new_posts(
             continue
 
         body = fm.get("_body", "")
-        # Truncate body for AI prompt context
-        body_excerpt = body[:2000] if len(body) > 2000 else body
+        body_excerpt = body[:BODY_EXCERPT_MAX_CHARS]
 
         posts.append({
             "title": fm.get("title", ""),

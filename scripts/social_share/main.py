@@ -13,6 +13,10 @@ from detect import detect_new_posts
 from ai import get_ai_provider
 from platforms import get_enabled_platforms
 
+DEFAULT_CONFIG_PATH = ".github/social-media-config.yaml"
+ALL_PLATFORMS = ["twitter", "linkedin", "bluesky", "telegram"]
+FALLBACK_MAX_CHARS = 9999
+
 
 def main():
     parser = argparse.ArgumentParser(description="Share new blog posts to social media")
@@ -22,7 +26,7 @@ def main():
     )
     parser.add_argument(
         "--config",
-        default=".github/social-media-config.yaml",
+        default=DEFAULT_CONFIG_PATH,
         help="Path to social media config YAML",
     )
     parser.add_argument(
@@ -61,7 +65,7 @@ def main():
         print("No platforms enabled. Set *_ENABLED=true for at least one platform.")
         return
 
-    platform_names = [p.name for p in platforms] if platforms else ["twitter", "linkedin", "bluesky", "telegram"]
+    platform_names = [p.name for p in platforms] if platforms else ALL_PLATFORMS
     if args.dry_run and not platforms:
         print("Dry-run mode: generating text for all platforms (none enabled)")
 
@@ -85,7 +89,7 @@ def main():
                 continue
 
             # Validate length
-            max_chars = config.get("platforms", {}).get(platform_name, {}).get("max_chars", 9999)
+            max_chars = config.get("platforms", {}).get(platform_name, {}).get("max_chars", FALLBACK_MAX_CHARS)
             if len(text) > max_chars:
                 print(f"WARNING: Generated text ({len(text)} chars) exceeds limit ({max_chars})")
                 text = text[:max_chars]

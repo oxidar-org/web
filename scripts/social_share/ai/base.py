@@ -3,6 +3,9 @@
 import os
 from abc import ABC, abstractmethod
 
+DEFAULT_MAX_CHARS = 280
+DEFAULT_MAX_TOKENS = 1024
+
 
 class AIProvider(ABC):
     """Abstract base class for AI text generation providers."""
@@ -23,7 +26,7 @@ class AIProvider(ABC):
     def _build_user_prompt(self, post: dict, platform_name: str, config: dict) -> str:
         """Build the user prompt combining post data and platform rules."""
         platform_config = config.get("platforms", {}).get(platform_name, {})
-        max_chars = platform_config.get("max_chars", 280)
+        max_chars = platform_config.get("max_chars", DEFAULT_MAX_CHARS)
         addendum = platform_config.get("prompt_addendum", "")
 
         return f"""Genera una publicación para {platform_name}.

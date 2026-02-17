@@ -5,6 +5,9 @@ from pathlib import Path
 
 import yaml
 
+DEFAULT_AI_PROVIDER = "anthropic"
+DEFAULT_BASE_URL = "https://oxidar.org"
+
 
 def load_config(config_path: str) -> dict:
     """Load social media config from YAML file."""
@@ -17,9 +20,9 @@ def load_config(config_path: str) -> dict:
 
 def get_ai_provider_name() -> str:
     """Get the AI provider name from environment."""
-    return os.environ.get("AI_PROVIDER", "anthropic")
+    return os.environ.get("AI_PROVIDER", DEFAULT_AI_PROVIDER)
 
 
 def get_base_url(config: dict) -> str:
     """Get the site base URL from config."""
-    return config.get("community", {}).get("website", "https://oxidar.org")
+    return config.get("community", {}).get("website", DEFAULT_BASE_URL)
