@@ -4,7 +4,7 @@ import os
 
 import tweepy
 
-from .base import Platform
+from .base import Platform, PublishResult
 
 
 class TwitterPlatform(Platform):
@@ -28,7 +28,7 @@ class TwitterPlatform(Platform):
     def name(self) -> str:
         return "twitter"
 
-    def publish(self, text: str, post: dict) -> dict:
+    def publish(self, text: str, post: dict) -> PublishResult:
         try:
             client = tweepy.Client(
                 consumer_key=self._api_key,
@@ -38,9 +38,6 @@ class TwitterPlatform(Platform):
             )
             response = client.create_tweet(text=text)
             tweet_id = response.data["id"]
-            return {
-                "success": True,
-                "url": f"https://x.com/i/status/{tweet_id}",
-            }
+            return PublishResult(success=True, url=f"https://x.com/i/status/{tweet_id}")
         except tweepy.TweepyException as e:
-            return {"success": False, "error": str(e)}
+            return PublishResult(success=False, error=str(e))

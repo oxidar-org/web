@@ -4,7 +4,7 @@ import os
 
 import requests
 
-from .base import Platform
+from .base import Platform, PublishResult
 
 
 class TelegramPlatform(Platform):
@@ -24,7 +24,7 @@ class TelegramPlatform(Platform):
     def name(self) -> str:
         return "telegram"
 
-    def publish(self, text: str, post: dict) -> dict:
+    def publish(self, text: str, post: dict) -> PublishResult:
         url = f"https://api.telegram.org/bot{self._bot_token}/sendMessage"
         payload = {
             "chat_id": self._chat_id,
@@ -37,13 +37,13 @@ class TelegramPlatform(Platform):
             resp = requests.post(url, json=payload, timeout=30)
             data = resp.json()
         except requests.RequestException as e:
-            return {"success": False, "error": str(e)}
+            return PublishResult(success=False, error=str(e))
 
         if data.get("ok"):
             msg_id = data["result"]["message_id"]
-            return {"success": True, "url": str(msg_id)}
+            return PublishResult(success=True, url=str(msg_id))
         else:
-            return {
-                "success": False,
-                "error": data.get("description", "Unknown Telegram error"),
-            }
+            return PublishResult(
+                success=False,
+                error=data.get("description", "Unknown Telegram error"),
+            )
