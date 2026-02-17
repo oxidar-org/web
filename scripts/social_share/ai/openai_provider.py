@@ -4,7 +4,7 @@ import os
 
 import openai
 
-from .base import AIProvider
+from .base import AIProvider, DEFAULT_MAX_TOKENS
 
 
 class OpenAIProvider(AIProvider):
@@ -24,7 +24,7 @@ class OpenAIProvider(AIProvider):
 
         response = self.client.chat.completions.create(
             model=model,
-            max_tokens=1024,
+            max_tokens=DEFAULT_MAX_TOKENS,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},

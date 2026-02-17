@@ -4,7 +4,7 @@ import os
 
 import anthropic
 
-from .base import AIProvider
+from .base import AIProvider, DEFAULT_MAX_TOKENS
 
 
 class AnthropicProvider(AIProvider):
@@ -24,7 +24,7 @@ class AnthropicProvider(AIProvider):
 
         message = self.client.messages.create(
             model=model,
-            max_tokens=1024,
+            max_tokens=DEFAULT_MAX_TOKENS,
             system=system_prompt,
             messages=[{"role": "user", "content": user_prompt}],
         )
