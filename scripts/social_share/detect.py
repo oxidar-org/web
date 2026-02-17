@@ -49,11 +49,11 @@ def parse_front_matter(file_path: str) -> dict | None:
     Returns a dict with front matter fields, or None if parsing fails.
     """
     path = Path(file_path)
-    if not path.exists():
+    try:
+        content = path.read_text(encoding="utf-8")
+    except FileNotFoundError:
         print(f"File not found: {file_path}", file=sys.stderr)
         return None
-
-    content = path.read_text(encoding="utf-8")
 
     # Match TOML front matter delimited by +++
     match = re.match(r"^\+\+\+\s*\n(.*?)\n\+\+\+\s*\n(.*)", content, re.DOTALL)

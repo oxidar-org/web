@@ -21,6 +21,12 @@ class TestLoadConfig:
         with pytest.raises(FileNotFoundError):
             load_config("/nonexistent/config.yaml")
 
+    def test_empty_yaml_returns_empty_dict(self, tmp_path):
+        config_file = tmp_path / "empty.yaml"
+        config_file.write_text("")
+        config = load_config(str(config_file))
+        assert config == {}
+
 
 class TestGetAiProviderName:
     def test_defaults_to_anthropic(self, monkeypatch):
