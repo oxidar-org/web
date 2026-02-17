@@ -4,7 +4,7 @@ import os
 
 from atproto import Client
 
-from .base import Platform
+from .base import Platform, PublishResult
 
 
 class BlueskyPlatform(Platform):
@@ -24,14 +24,11 @@ class BlueskyPlatform(Platform):
     def name(self) -> str:
         return "bluesky"
 
-    def publish(self, text: str, post: dict) -> dict:
+    def publish(self, text: str, post: dict) -> PublishResult:
         try:
             client = Client()
             client.login(self._handle, self._app_password)
             response = client.send_post(text=text)
-            return {
-                "success": True,
-                "url": response.uri,
-            }
+            return PublishResult(success=True, url=response.uri)
         except Exception as e:
-            return {"success": False, "error": str(e)}
+            return PublishResult(success=False, error=str(e))

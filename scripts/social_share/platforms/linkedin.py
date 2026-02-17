@@ -4,7 +4,7 @@ import os
 
 import requests
 
-from .base import Platform
+from .base import Platform, PublishResult
 
 
 class LinkedInPlatform(Platform):
@@ -24,7 +24,7 @@ class LinkedInPlatform(Platform):
     def name(self) -> str:
         return "linkedin"
 
-    def publish(self, text: str, post: dict) -> dict:
+    def publish(self, text: str, post: dict) -> PublishResult:
         url = "https://api.linkedin.com/v2/ugcPosts"
         headers = {
             "Authorization": f"Bearer {self._access_token}",
@@ -56,13 +56,10 @@ class LinkedInPlatform(Platform):
         try:
             resp = requests.post(url, headers=headers, json=payload, timeout=30)
         except requests.RequestException as e:
-            return {"success": False, "error": str(e)}
+            return PublishResult(success=False, error=str(e))
 
         if resp.status_code == 201:
             post_id = resp.json().get("id", "")
-            return {"success": True, "url": post_id}
+            return PublishResult(success=True, url=post_id)
         else:
-            return {
-                "success": False,
-                "error": f"HTTP {resp.status_code}: {resp.text}",
-            }
+            return PublishResult(success=False, error=f"HTTP {resp.status_code}: {resp.text}")

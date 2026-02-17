@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import logging
 import re
 import subprocess
-import sys
 from pathlib import Path
+
+logger = logging.getLogger("social_share")
 
 try:
     import tomllib
@@ -28,7 +30,7 @@ def get_new_post_files(repo_root: str | None = None) -> list[str]:
         cwd=repo_root,
     )
     if result.returncode != 0:
-        print(f"git diff failed: {result.stderr}", file=sys.stderr)
+        logger.error("git diff failed: %s", result.stderr)
         return []
     files = [f.strip() for f in result.stdout.strip().split("\n") if f.strip()]
     return files
@@ -56,13 +58,13 @@ def parse_front_matter(file_path: str) -> dict | None:
     try:
         content = path.read_text(encoding="utf-8")
     except FileNotFoundError:
-        print(f"File not found: {file_path}", file=sys.stderr)
+        logger.error("File not found: %s", file_path)
         return None
 
     # Match TOML front matter delimited by +++
     match = re.match(r"^\+\+\+\s*\n(.*?)\n\+\+\+\s*\n(.*)", content, re.DOTALL)
     if not match:
-        print(f"No TOML front matter found in: {file_path}", file=sys.stderr)
+        logger.error("No TOML front matter found in: %s", file_path)
         return None
 
     toml_str = match.group(1)
@@ -71,7 +73,7 @@ def parse_front_matter(file_path: str) -> dict | None:
     try:
         fm = tomllib.loads(toml_str)
     except tomllib.TOMLDecodeError as e:
-        print(f"TOML parse error in {file_path}: {e}", file=sys.stderr)
+        logger.error("TOML parse error in %s: %s", file_path, e)
         return None
 
     fm["_body"] = body
@@ -120,7 +122,7 @@ def detect_new_posts(
     if posts_file:
         path = Path(posts_file)
         if not path.exists():
-            print(f"Posts file not found: {posts_file}", file=sys.stderr)
+            logger.error("Posts file not found: %s", posts_file)
             return []
         files = [line.strip() for line in path.read_text().strip().split("\n") if line.strip()]
     else:
@@ -128,7 +130,7 @@ def detect_new_posts(
         files = filter_post_files(raw_files)
 
     if not files:
-        print("No new posts detected.")
+        logger.info("No new posts detected.")
         return []
 
     posts = []
@@ -138,7 +140,7 @@ def detect_new_posts(
         if fm is None:
             continue
         if not should_share(fm):
-            print(f"Skipping (share disabled): {f}")
+            logger.info("Skipping (share disabled): %s", f)
             continue
 
         body = fm.get("_body", "")
