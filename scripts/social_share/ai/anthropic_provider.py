@@ -28,4 +28,6 @@ class AnthropicProvider(AIProvider):
             system=system_prompt,
             messages=[{"role": "user", "content": user_prompt}],
         )
+        if not message.content:
+            raise ValueError("Empty response from Anthropic API")
         return message.content[0].text.strip()
