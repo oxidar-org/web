@@ -57,8 +57,8 @@ def parse_front_matter(file_path: str) -> dict | None:
     path = Path(file_path)
     try:
         content = path.read_text(encoding="utf-8")
-    except FileNotFoundError:
-        logger.error("File not found: %s", file_path)
+    except (FileNotFoundError, PermissionError, UnicodeDecodeError) as e:
+        logger.error("Cannot read %s: %s", file_path, e)
         return None
 
     # Match TOML front matter delimited by +++

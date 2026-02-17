@@ -39,5 +39,5 @@ class TwitterPlatform(Platform):
             response = client.create_tweet(text=text)
             tweet_id = response.data["id"]
             return PublishResult(success=True, url=f"https://x.com/i/status/{tweet_id}")
-        except tweepy.TweepyException as e:
+        except (tweepy.TweepyException, KeyError) as e:
             return PublishResult(success=False, error=str(e))

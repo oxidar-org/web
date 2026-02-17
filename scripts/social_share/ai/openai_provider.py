@@ -30,4 +30,6 @@ class OpenAIProvider(AIProvider):
                 {"role": "user", "content": user_prompt},
             ],
         )
+        if not response.choices:
+            raise ValueError("Empty response from OpenAI API")
         return response.choices[0].message.content.strip()

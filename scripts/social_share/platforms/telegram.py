@@ -36,11 +36,11 @@ class TelegramPlatform(Platform):
         try:
             resp = requests.post(url, json=payload, timeout=30)
             data = resp.json()
-        except requests.RequestException as e:
+        except (requests.RequestException, ValueError) as e:
             return PublishResult(success=False, error=str(e))
 
         if data.get("ok"):
-            msg_id = data["result"]["message_id"]
+            msg_id = data.get("result", {}).get("message_id", "")
             return PublishResult(success=True, url=str(msg_id))
         else:
             return PublishResult(
