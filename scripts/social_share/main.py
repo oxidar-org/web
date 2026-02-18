@@ -12,12 +12,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from config import load_config, get_ai_provider_name, get_base_url
 from detect import detect_new_posts
 from ai import get_ai_provider
-from platforms import get_enabled_platforms
+from platforms import get_enabled_platforms, ALL_PLATFORM_NAMES
 
 logger = logging.getLogger("social_share")
 
 DEFAULT_CONFIG_PATH = ".github/social-media-config.yaml"
-ALL_PLATFORMS = ["twitter", "linkedin", "bluesky", "telegram"]
 FALLBACK_MAX_CHARS = 9999
 
 
@@ -75,7 +74,7 @@ def main():
 
     # Build platform lookup for publishing
     platform_map = {p.name: p for p in platforms}
-    target_names = list(platform_map.keys()) if platforms else ALL_PLATFORMS
+    target_names = list(platform_map.keys()) if platforms else ALL_PLATFORM_NAMES
 
     if args.dry_run and not platforms:
         logger.info("Dry-run mode: generating text for all platforms (none enabled)")

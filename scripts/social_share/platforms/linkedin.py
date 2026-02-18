@@ -1,24 +1,22 @@
 """LinkedIn platform implementation using REST API v2."""
 
-import os
+from __future__ import annotations
 
 import requests
 
-from .base import Platform, PublishResult
+from .base import Platform, PublishResult, require_env
 
 
 class LinkedInPlatform(Platform):
-    def __init__(self):
-        self._access_token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
-        self._org_id = os.environ.get("LINKEDIN_ORG_ID")
-        missing = [
-            name for name, val in [
-                ("LINKEDIN_ACCESS_TOKEN", self._access_token),
-                ("LINKEDIN_ORG_ID", self._org_id),
-            ] if not val
-        ]
-        if missing:
-            raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
+    def __init__(self, access_token: str, org_id: str, session: requests.Session | None = None):
+        self._access_token = access_token
+        self._org_id = org_id
+        self._session = session or requests.Session()
+
+    @classmethod
+    def from_env(cls) -> LinkedInPlatform:
+        creds = require_env("LINKEDIN_ACCESS_TOKEN", "LINKEDIN_ORG_ID")
+        return cls(access_token=creds["LINKEDIN_ACCESS_TOKEN"], org_id=creds["LINKEDIN_ORG_ID"])
 
     @property
     def name(self) -> str:
@@ -54,7 +52,7 @@ class LinkedInPlatform(Platform):
         }
 
         try:
-            resp = requests.post(url, headers=headers, json=payload, timeout=30)
+            resp = self._session.post(url, headers=headers, json=payload, timeout=30)
             if resp.status_code == 201:
                 post_id = resp.json().get("id", "")
                 return PublishResult(success=True, url=post_id)

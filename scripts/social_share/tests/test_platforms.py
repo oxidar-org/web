@@ -3,12 +3,13 @@
 import importlib
 import sys
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from platforms.base import get_enabled_platforms
+from platforms import get_enabled_platforms
 
 _has_platform_deps = all(
     importlib.util.find_spec(mod) for mod in ["tweepy", "requests", "atproto"]
@@ -70,7 +71,9 @@ class TestGetEnabledPlatforms:
         monkeypatch.setenv("BLUESKY_ENABLED", "True")
         for key in ["TWITTER_ENABLED", "LINKEDIN_ENABLED", "TELEGRAM_ENABLED"]:
             monkeypatch.delenv(key, raising=False)
-        platforms = get_enabled_platforms()
+        # Bluesky.from_env() calls client.login() — mock to avoid a real network call
+        with patch("platforms.bluesky.Client"):
+            platforms = get_enabled_platforms()
         assert len(platforms) == 1
         assert platforms[0].name == "bluesky"
 
