@@ -6,7 +6,6 @@ import os
 import sys
 from pathlib import Path
 
-# Add parent dir to path for imports when run as script
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import load_config, get_ai_provider_name, get_base_url
@@ -43,11 +42,9 @@ def main():
         format="%(levelname)s: %(message)s",
     )
 
-    # Load configuration
     config = load_config(args.config)
     base_url = get_base_url(config)
 
-    # Detect new posts
     posts = detect_new_posts(
         repo_root=os.getcwd(),
         base_url=base_url,
@@ -61,25 +58,21 @@ def main():
     for p in posts:
         logger.info("  - %s (%s)", p["title"], p["url"])
 
-    # Initialize AI provider
     provider_name = get_ai_provider_name()
     logger.info("Using AI provider: %s", provider_name)
     ai = get_ai_provider()
 
-    # Get enabled platforms
     platforms = get_enabled_platforms()
     if not platforms and not args.dry_run:
         logger.warning("No platforms enabled. Set *_ENABLED=true for at least one platform.")
         return
 
-    # Build platform lookup for publishing
     platform_map = {p.name: p for p in platforms}
     target_names = list(platform_map.keys()) if platforms else ALL_PLATFORM_NAMES
 
     if args.dry_run and not platforms:
         logger.info("Dry-run mode: generating text for all platforms (none enabled)")
 
-    # Process each post x platform
     errors = []
     for post in posts:
         logger.info("=" * 60)
@@ -95,7 +88,6 @@ def main():
                 errors.append((post["title"], platform_name, f"AI error: {e}"))
                 continue
 
-            # Validate length
             max_chars = config.get("platforms", {}).get(platform_name, {}).get("max_chars", FALLBACK_MAX_CHARS)
             if len(text) > max_chars:
                 logger.warning("Generated text (%d chars) exceeds limit (%d)", len(text), max_chars)
@@ -123,7 +115,6 @@ def main():
                 logger.error("Publish error: %s", e)
                 errors.append((post["title"], platform_name, str(e)))
 
-    # Summary
     logger.info("=" * 60)
     if errors:
         logger.error("Completed with %d error(s):", len(errors))
