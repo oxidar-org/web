@@ -37,16 +37,10 @@ def get_new_post_files(repo_root: str | None = None) -> list[str]:
 
 
 def filter_post_files(files: list[str]) -> list[str]:
-    """Filter out English translations, index files, etc."""
-    filtered = []
-    for f in files:
-        basename = Path(f).name
-        if basename.startswith(INDEX_FILE_PREFIX):
-            continue
-        if basename.endswith(ENGLISH_TRANSLATION_SUFFIX):
-            continue
-        filtered.append(f)
-    return filtered
+    """Filter out English translations and index files."""
+    return [f for f in files
+            if not Path(f).name.startswith(INDEX_FILE_PREFIX)
+            and not Path(f).name.endswith(ENGLISH_TRANSLATION_SUFFIX)]
 
 
 def parse_front_matter(file_path: str) -> dict | None:
@@ -82,25 +76,13 @@ def parse_front_matter(file_path: str) -> dict | None:
 
 
 def should_share(fm: dict) -> bool:
-    """Check if a post should be shared based on front matter flags."""
-    if fm.get("draft", False):
-        return False
-    if fm.get("share") is False:
-        return False
-    if fm.get("hiddenFromHomePage", False):
-        return False
-    return True
+    """Return True unless the post is a draft, share=false, or hidden from home."""
+    return not fm.get("draft") and fm.get("share") is not False and not fm.get("hiddenFromHomePage")
 
 
 def derive_url(file_path: str, base_url: str) -> str:
-    """Derive the post URL from the file path using the permalink pattern.
-
-    Hugo permalink for posts is :contentbasename, so the URL is the
-    filename stem (without extension).
-    """
-    stem = Path(file_path).stem
-    base = base_url.rstrip("/")
-    return f"{base}/{stem}/"
+    """Build post URL using Hugo's :filename permalink pattern."""
+    return f"{base_url.rstrip('/')}/{Path(file_path).stem}/"
 
 
 def detect_new_posts(
@@ -108,17 +90,7 @@ def detect_new_posts(
     base_url: str = "https://oxidar.org",
     posts_file: str | None = None,
 ) -> list[dict]:
-    """Detect and parse new posts ready for sharing.
-
-    Args:
-        repo_root: Root of the git repository.
-        base_url: Site base URL for building post URLs.
-        posts_file: Optional file containing list of post paths (one per line),
-                    used instead of git diff.
-
-    Returns:
-        List of post dicts with title, description, tags, categories, body, url.
-    """
+    """Detect and parse new posts ready for sharing."""
     if posts_file:
         path = Path(posts_file)
         if not path.exists():
