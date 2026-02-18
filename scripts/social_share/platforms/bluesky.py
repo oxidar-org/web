@@ -1,24 +1,22 @@
 """Bluesky platform implementation using AT Protocol."""
 
-import os
+from __future__ import annotations
 
 from atproto import Client
 
-from .base import Platform, PublishResult
+from .base import Platform, PublishResult, require_env
 
 
 class BlueskyPlatform(Platform):
-    def __init__(self):
-        self._handle = os.environ.get("BLUESKY_HANDLE")
-        self._app_password = os.environ.get("BLUESKY_APP_PASSWORD")
-        missing = [
-            name for name, val in [
-                ("BLUESKY_HANDLE", self._handle),
-                ("BLUESKY_APP_PASSWORD", self._app_password),
-            ] if not val
-        ]
-        if missing:
-            raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
+    def __init__(self, client: Client):
+        self._client = client
+
+    @classmethod
+    def from_env(cls) -> BlueskyPlatform:
+        creds = require_env("BLUESKY_HANDLE", "BLUESKY_APP_PASSWORD")
+        client = Client()
+        client.login(creds["BLUESKY_HANDLE"], creds["BLUESKY_APP_PASSWORD"])
+        return cls(client=client)
 
     @property
     def name(self) -> str:
@@ -26,9 +24,7 @@ class BlueskyPlatform(Platform):
 
     def publish(self, text: str, post: dict) -> PublishResult:
         try:
-            client = Client()
-            client.login(self._handle, self._app_password)
-            response = client.send_post(text=text)
+            response = self._client.send_post(text=text)
             return PublishResult(success=True, url=response.uri)
         except Exception as e:
             return PublishResult(success=False, error=str(e))

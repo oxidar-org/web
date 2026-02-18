@@ -1,4 +1,4 @@
-"""Abstract platform interface and factory."""
+"""Abstract platform interface and shared utilities."""
 
 from __future__ import annotations
 
@@ -36,23 +36,10 @@ class Platform(ABC):
         """
 
 
-# Registry mapping env var prefix -> (module, class name)
-_PLATFORM_REGISTRY: dict[str, tuple[str, str]] = {
-    "TWITTER": (".twitter", "TwitterPlatform"),
-    "LINKEDIN": (".linkedin", "LinkedInPlatform"),
-    "BLUESKY": (".bluesky", "BlueskyPlatform"),
-    "TELEGRAM": (".telegram", "TelegramPlatform"),
-}
-
-
-def get_enabled_platforms() -> list[Platform]:
-    """Return list of platform instances that are enabled via env vars."""
-    import importlib
-
-    platforms = []
-    for env_key, (module_path, class_name) in _PLATFORM_REGISTRY.items():
-        if os.environ.get(f"{env_key}_ENABLED", "false").lower() == "true":
-            mod = importlib.import_module(module_path, package=__package__)
-            cls = getattr(mod, class_name)
-            platforms.append(cls())
-    return platforms
+def require_env(*names: str) -> dict[str, str]:
+    """Read env vars and raise ValueError if any are missing or empty."""
+    values = {name: os.environ.get(name, "") for name in names}
+    missing = [name for name, val in values.items() if not val]
+    if missing:
+        raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
+    return values

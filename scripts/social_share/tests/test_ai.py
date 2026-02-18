@@ -1,15 +1,14 @@
 """Tests for AI provider base and factory."""
 
-import os
 import sys
 from pathlib import Path
-from unittest.mock import patch, MagicMock
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from ai.base import AIProvider, get_ai_provider
+from ai.base import AIProvider, build_user_prompt
+from ai import get_ai_provider
 
 
 class DummyProvider(AIProvider):
@@ -21,7 +20,6 @@ class DummyProvider(AIProvider):
 
 class TestBuildUserPrompt:
     def setup_method(self):
-        self.provider = DummyProvider()
         self.post = {
             "title": "Rust y WebAssembly",
             "description": "Tutorial de Rust con WASM",
@@ -39,25 +37,25 @@ class TestBuildUserPrompt:
         }
 
     def test_includes_post_title(self):
-        prompt = self.provider._build_user_prompt(self.post, "twitter", self.config)
+        prompt = build_user_prompt(self.post, "twitter", self.config)
         assert "Rust y WebAssembly" in prompt
 
     def test_includes_url(self):
-        prompt = self.provider._build_user_prompt(self.post, "twitter", self.config)
+        prompt = build_user_prompt(self.post, "twitter", self.config)
         assert "https://oxidar.org/wasm/" in prompt
 
     def test_includes_tags(self):
-        prompt = self.provider._build_user_prompt(self.post, "twitter", self.config)
+        prompt = build_user_prompt(self.post, "twitter", self.config)
         assert "rust" in prompt
         assert "wasm" in prompt
 
     def test_includes_platform_rules(self):
-        prompt = self.provider._build_user_prompt(self.post, "twitter", self.config)
+        prompt = build_user_prompt(self.post, "twitter", self.config)
         assert "280" in prompt
         assert "Sé conciso." in prompt
 
     def test_handles_missing_platform_config(self):
-        prompt = self.provider._build_user_prompt(self.post, "bluesky", self.config)
+        prompt = build_user_prompt(self.post, "bluesky", self.config)
         assert "Rust y WebAssembly" in prompt
 
 

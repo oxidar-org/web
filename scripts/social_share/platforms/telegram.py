@@ -1,24 +1,22 @@
 """Telegram platform implementation using Bot API."""
 
-import os
+from __future__ import annotations
 
 import requests
 
-from .base import Platform, PublishResult
+from .base import Platform, PublishResult, require_env
 
 
 class TelegramPlatform(Platform):
-    def __init__(self):
-        self._bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
-        self._chat_id = os.environ.get("TELEGRAM_CHAT_ID")
-        missing = [
-            name for name, val in [
-                ("TELEGRAM_BOT_TOKEN", self._bot_token),
-                ("TELEGRAM_CHAT_ID", self._chat_id),
-            ] if not val
-        ]
-        if missing:
-            raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
+    def __init__(self, bot_token: str, chat_id: str, session: requests.Session | None = None):
+        self._bot_token = bot_token
+        self._chat_id = chat_id
+        self._session = session or requests.Session()
+
+    @classmethod
+    def from_env(cls) -> TelegramPlatform:
+        creds = require_env("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID")
+        return cls(bot_token=creds["TELEGRAM_BOT_TOKEN"], chat_id=creds["TELEGRAM_CHAT_ID"])
 
     @property
     def name(self) -> str:
@@ -34,7 +32,7 @@ class TelegramPlatform(Platform):
         }
 
         try:
-            resp = requests.post(url, json=payload, timeout=30)
+            resp = self._session.post(url, json=payload, timeout=30)
             data = resp.json()
         except (requests.RequestException, ValueError) as e:
             return PublishResult(success=False, error=str(e))
