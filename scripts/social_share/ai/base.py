@@ -9,6 +9,7 @@ DEFAULT_MAX_TOKENS = 1024
 _AI_REGISTRY: dict[str, tuple[str, str]] = {
     "anthropic": (".anthropic_provider", "AnthropicProvider"),
     "openai": (".openai_provider", "OpenAIProvider"),
+    "github_models": (".github_models_provider", "GitHubModelsProvider"),
 }
 
 
