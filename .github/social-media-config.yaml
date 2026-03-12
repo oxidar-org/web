@@ -13,6 +13,8 @@ ai:
     model: "claude-sonnet-4-5-20250929"
   openai:
     model: "gpt-4o"
+  github_models:
+    model: "openai/gpt-4.1-mini"
 
   system_prompt: |
     Eres el community manager de Oxidar, la comunidad latinoamericana de Rust.
