@@ -6,6 +6,11 @@ on:
     types: [completed]
     branches: [main]
   workflow_dispatch:
+    inputs:
+      test_post:
+        description: 'Post path to share (e.g. content/posts/2026.01.26-rustconf-2026-cfp/rustconf-2026-cfp.md)'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -31,16 +36,22 @@ jobs:
       - name: Detect new posts
         id: detect
         run: |
-          NEW_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'content/posts/' | grep '\.md$' || true)
-          POSTS=$(echo "$NEW_FILES" | grep -v '\.en\.md$' | grep -v '_index\.md' | grep -v '^$' || true)
-          if [ -z "$POSTS" ]; then
-            echo "No new posts detected."
-            echo "has_posts=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "New posts detected:"
-            echo "$POSTS"
-            echo "$POSTS" > /tmp/new_posts.txt
+          if [ -n "${{ inputs.test_post }}" ]; then
+            echo "Using manually provided post: ${{ inputs.test_post }}"
+            echo "${{ inputs.test_post }}" > /tmp/new_posts.txt
             echo "has_posts=true" >> "$GITHUB_OUTPUT"
+          else
+            NEW_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'content/posts/' | grep '\.md$' || true)
+            POSTS=$(echo "$NEW_FILES" | grep -v '\.en\.md$' | grep -v '_index\.md' | grep -v '^$' || true)
+            if [ -z "$POSTS" ]; then
+              echo "No new posts detected."
+              echo "has_posts=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "New posts detected:"
+              echo "$POSTS"
+              echo "$POSTS" > /tmp/new_posts.txt
+              echo "has_posts=true" >> "$GITHUB_OUTPUT"
+            fi
           fi
 
       - uses: actions/setup-python@v5
