@@ -19,9 +19,9 @@ INDEX_FILE_PREFIX = "_"
 
 
 def get_new_post_files(repo_root: str | None = None) -> list[str]:
-    """Get list of newly added markdown files in content/posts/ from git diff."""
+    """Get list of added or modified markdown files in content/posts/ from git diff."""
     cmd = [
-        "git", "diff", "--name-only", "--diff-filter=A",
+        "git", "diff", "--name-only", "--diff-filter=AM",
         "HEAD~1", "HEAD", "--", "content/posts/**/*.md",
     ]
     result = subprocess.run(

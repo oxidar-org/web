@@ -54,10 +54,10 @@ jobs:
             echo "${{ inputs.post_path }}" > /tmp/posts_to_translate.txt
             echo "has_posts=true" >> "$GITHUB_OUTPUT"
           else
-            # Find .md files that were added or modified in the PR and have no .en.md sibling
+            # Find .md files added or modified in the PR that have no .en.md sibling yet
             PR_BASE="${{ github.event.pull_request.base.sha }}"
             PR_HEAD="${{ github.event.pull_request.head.sha }}"
-            NEW_FILES=$(git diff --name-only --diff-filter=A "$PR_BASE" FETCH_HEAD -- 'content/posts/' 2>/dev/null \
+            NEW_FILES=$(git diff --name-only --diff-filter=AM "$PR_BASE" FETCH_HEAD -- 'content/posts/' 2>/dev/null \
               | grep '\.md$' \
               | grep -v '\.en\.md$' \
               | grep -v '_index\.md' \
