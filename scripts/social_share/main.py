@@ -96,6 +96,71 @@ def _publish_messages(messages: list[dict], platform_map: dict) -> list[tuple]:
     return errors
 
 
+def _set_issue_type(repo: str, issue_number: int, type_name: str, requests_mod) -> None:
+    """Set the issue type via GraphQL (REST API does not support issue types)."""
+    # Fetch the issue node ID
+    issue_resp = requests_mod.get(
+        f"{GITHUB_API}/repos/{repo}/issues/{issue_number}",
+        headers=_github_headers(),
+        timeout=30,
+    )
+    if issue_resp.status_code != 200:
+        logger.warning("Could not fetch issue node ID for type assignment: %s", issue_resp.text)
+        return
+    node_id = issue_resp.json().get("node_id", "")
+
+    # Fetch the issue type ID by name from the repo's owner org
+    owner = repo.split("/")[0]
+    type_query = """
+    query($owner: String!) {
+      organization(login: $owner) {
+        issueTypes(first: 20) {
+          nodes { id name }
+        }
+      }
+    }
+    """
+    type_resp = requests_mod.post(
+        f"{GITHUB_API}/graphql",
+        headers=_github_headers(),
+        json={"query": type_query, "variables": {"owner": owner}},
+        timeout=30,
+    )
+    if type_resp.status_code != 200:
+        logger.warning("Could not fetch issue types: %s", type_resp.text)
+        return
+
+    issue_types = (
+        type_resp.json()
+        .get("data", {})
+        .get("organization", {})
+        .get("issueTypes", {})
+        .get("nodes", [])
+    )
+    type_id = next((t["id"] for t in issue_types if t["name"].lower() == type_name.lower()), None)
+    if not type_id:
+        logger.warning("Issue type '%s' not found in org — skipping type assignment.", type_name)
+        return
+
+    mutation = """
+    mutation($issueId: ID!, $issueTypeId: ID!) {
+      updateIssue(input: {id: $issueId, issueTypeId: $issueTypeId}) {
+        issue { number }
+      }
+    }
+    """
+    mut_resp = requests_mod.post(
+        f"{GITHUB_API}/graphql",
+        headers=_github_headers(),
+        json={"query": mutation, "variables": {"issueId": node_id, "issueTypeId": type_id}},
+        timeout=30,
+    )
+    if mut_resp.status_code == 200 and not mut_resp.json().get("errors"):
+        logger.info("Issue type set to '%s'", type_name)
+    else:
+        logger.warning("Failed to set issue type: %s", mut_resp.text)
+
+
 def _create_issues(messages: list[dict]) -> None:
     """Create one GitHub issue per post with formatted messages for review."""
     import requests
@@ -104,6 +169,8 @@ def _create_issues(messages: list[dict]) -> None:
     if not repo:
         logger.error("GITHUB_REPOSITORY not set — cannot create issues")
         return
+
+    actor = os.environ.get("GITHUB_ACTOR", "")
 
     # Group messages by post URL
     posts: dict[str, dict] = {}
@@ -118,15 +185,20 @@ def _create_issues(messages: list[dict]) -> None:
         body = format_issue_body(post, data["messages"])
         title = format_issue_title(post["title"])
 
+        payload: dict = {"title": title, "body": body, "labels": [PENDING_LABEL]}
+        if actor:
+            payload["assignees"] = [actor]
+
         resp = requests.post(
             f"{GITHUB_API}/repos/{repo}/issues",
             headers=_github_headers(),
-            json={"title": title, "body": body, "labels": [PENDING_LABEL]},
+            json=payload,
             timeout=30,
         )
         if resp.status_code == 201:
             issue = resp.json()
             logger.info("Created issue #%d: %s", issue["number"], issue["html_url"])
+            _set_issue_type(repo, issue["number"], "Task", requests)
         else:
             logger.error("Failed to create issue for '%s': %s", post["title"], resp.text)
 
