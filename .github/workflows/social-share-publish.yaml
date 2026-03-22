@@ -1,0 +1,87 @@
+name: Publish approved social media messages
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+  issues: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  publish:
+    name: Publish to platforms
+    runs-on: ubuntu-latest
+    # Only run when the approved label is added to an issue created by the
+    # generate workflow (github-actions[bot]) — prevents manual issues from
+    # triggering publishing even if a collaborator crafts the right title/label.
+    if: |
+      github.event.label.name == 'social: approved' &&
+      startsWith(github.event.issue.title, '[Social]') &&
+      github.event.issue.user.login == 'github-actions[bot]'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check if already published
+        id: check
+        run: |
+          LABELS=$(gh issue view ${{ github.event.issue.number }} \
+            --json labels \
+            --jq '[.labels[].name] | join(",")' \
+            --repo ${{ github.repository }})
+          if echo "$LABELS" | grep -qF "social: published"; then
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+            echo "Issue #${{ github.event.issue.number }} already published — skipping."
+          else
+            echo "already_published=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        if: steps.check.outputs.already_published == 'false'
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        if: steps.check.outputs.already_published == 'false'
+        run: pip install -r scripts/social_share/requirements.txt
+
+      - name: Publish to platforms
+        if: steps.check.outputs.already_published == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TWITTER_ENABLED: ${{ vars.TWITTER_ENABLED || 'false' }}
+          LINKEDIN_ENABLED: ${{ vars.LINKEDIN_ENABLED || 'false' }}
+          BLUESKY_ENABLED: ${{ vars.BLUESKY_ENABLED || 'false' }}
+          TELEGRAM_ENABLED: ${{ vars.TELEGRAM_ENABLED || 'false' }}
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python scripts/social_share/main.py \
+            --config .github/social-media-config.yaml \
+            --from-issue ${{ github.event.issue.number }}
+
+      - name: Mark as published and close issue
+        if: steps.check.outputs.already_published == 'false'
+        run: |
+          gh issue edit ${{ github.event.issue.number }} \
+            --add-label "social: published" \
+            --repo ${{ github.repository }}
+          gh issue close ${{ github.event.issue.number }} \
+            --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
