@@ -23,38 +23,36 @@ class LinkedInPlatform(Platform):
         return "linkedin"
 
     def publish(self, text: str, post: dict) -> PublishResult:
-        url = "https://api.linkedin.com/v2/ugcPosts"
+        url = "https://api.linkedin.com/rest/posts"
         headers = {
             "Authorization": f"Bearer {self._access_token}",
             "Content-Type": "application/json",
             "X-Restli-Protocol-Version": "2.0.0",
+            "LinkedIn-Version": "202408",
         }
         payload = {
             "author": f"urn:li:organization:{self._org_id}",
             "lifecycleState": "PUBLISHED",
-            "specificContent": {
-                "com.linkedin.ugc.ShareContent": {
-                    "shareCommentary": {"text": text},
-                    "shareMediaCategory": "ARTICLE",
-                    "media": [
-                        {
-                            "status": "READY",
-                            "originalUrl": post["url"],
-                            "title": {"text": post["title"]},
-                            "description": {"text": post.get("description", "")},
-                        }
-                    ],
-                }
+            "visibility": "PUBLIC",
+            "distribution": {
+                "feedDistribution": "MAIN_FEED",
+                "targetEntities": [],
+                "thirdPartyDistributionChannels": [],
             },
-            "visibility": {
-                "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
+            "commentary": text,
+            "content": {
+                "article": {
+                    "source": post["url"],
+                    "title": post["title"],
+                    "description": post.get("description", ""),
+                }
             },
         }
 
         try:
             resp = self._session.post(url, headers=headers, json=payload, timeout=30)
             if resp.status_code == 201:
-                post_id = resp.json().get("id", "")
+                post_id = resp.headers.get("x-restli-id", resp.text)
                 return PublishResult(success=True, url=post_id)
             else:
                 return PublishResult(success=False, error=f"HTTP {resp.status_code}: {resp.text}")
