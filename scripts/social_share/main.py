@@ -130,13 +130,9 @@ def _set_issue_type(repo: str, issue_number: int, type_name: str, requests_mod) 
         logger.warning("Could not fetch issue types: %s", type_resp.text)
         return
 
-    issue_types = (
-        type_resp.json()
-        .get("data", {})
-        .get("organization", {})
-        .get("issueTypes", {})
-        .get("nodes", [])
-    )
+    data = type_resp.json().get("data") or {}
+    org = data.get("organization") or {}
+    issue_types = (org.get("issueTypes") or {}).get("nodes", [])
     type_id = next((t["id"] for t in issue_types if t["name"].lower() == type_name.lower()), None)
     if not type_id:
         logger.warning("Issue type '%s' not found in org — skipping type assignment.", type_name)
