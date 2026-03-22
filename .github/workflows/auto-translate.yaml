@@ -1,0 +1,172 @@
+name: Auto-translate new posts to English
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'content/posts/**/*.md'
+  workflow_dispatch:
+    inputs:
+      post_path:
+        description: 'Post path to translate (e.g. content/posts/2026.03.14-snakear/snakear.md)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  models: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  translate:
+    name: Translate new Spanish posts
+    runs-on: ubuntu-latest
+    # Skip commits made by the bot itself to prevent re-trigger loops
+    if: github.actor != 'github-actions[bot]'
+
+    steps:
+      - name: Checkout base branch (trusted scripts)
+        uses: actions/checkout@v4
+        with:
+          # Always check out main — this is where our trusted scripts live.
+          # pull_request_target guarantees the workflow YAML comes from main too.
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Overlay content/posts/ from PR head
+        if: github.event_name == 'pull_request_target'
+        run: |
+          # Fetch only content/posts/ from the PR head.
+          # Scripts remain from main — no PR-supplied code is executed.
+          PR_SHA="${{ github.event.pull_request.head.sha }}"
+          git fetch origin "$PR_SHA"
+          git checkout FETCH_HEAD -- content/posts/
+
+      - name: Detect posts needing translation
+        id: detect
+        run: |
+          if [ -n "${{ inputs.post_path }}" ]; then
+            echo "Using manually provided post: ${{ inputs.post_path }}"
+            echo "${{ inputs.post_path }}" > /tmp/posts_to_translate.txt
+            echo "has_posts=true" >> "$GITHUB_OUTPUT"
+          else
+            # Find .md files that were added or modified in the PR and have no .en.md sibling
+            PR_BASE="${{ github.event.pull_request.base.sha }}"
+            PR_HEAD="${{ github.event.pull_request.head.sha }}"
+            NEW_FILES=$(git diff --name-only --diff-filter=A "$PR_BASE" FETCH_HEAD -- 'content/posts/' 2>/dev/null \
+              | grep '\.md$' \
+              | grep -v '\.en\.md$' \
+              | grep -v '_index\.md' \
+              || true)
+
+            # Filter out posts that already have a .en.md sibling
+            NEEDS_TRANSLATION=""
+            while IFS= read -r f; do
+              [ -z "$f" ] && continue
+              EN_PATH="${f%.md}.en.md"
+              if [ ! -f "$EN_PATH" ]; then
+                NEEDS_TRANSLATION="$NEEDS_TRANSLATION"$'\n'"$f"
+              fi
+            done <<< "$NEW_FILES"
+
+            NEEDS_TRANSLATION=$(echo "$NEEDS_TRANSLATION" | grep -v '^$' || true)
+
+            if [ -z "$NEEDS_TRANSLATION" ]; then
+              echo "No posts need translation."
+              echo "has_posts=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "Posts to translate:"
+              echo "$NEEDS_TRANSLATION"
+              echo "$NEEDS_TRANSLATION" > /tmp/posts_to_translate.txt
+              echo "has_posts=true" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+      - uses: actions/setup-python@v5
+        if: steps.detect.outputs.has_posts == 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        if: steps.detect.outputs.has_posts == 'true'
+        run: pip install -r scripts/auto_translate/requirements.txt
+
+      - name: Run translator
+        if: steps.detect.outputs.has_posts == 'true'
+        id: translate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER || 'github_models' }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          OUTPUT=$(python scripts/auto_translate/main.py \
+            --posts-file /tmp/posts_to_translate.txt \
+            --repo-root "$GITHUB_WORKSPACE")
+          echo "$OUTPUT"
+
+          # Parse the structured output to get translated file paths and titles
+          TRANSLATED=$(echo "$OUTPUT" | awk '/TRANSLATED_FILES_START/{f=1;next}/TRANSLATED_FILES_END/{f=0}f')
+
+          if [ -z "$TRANSLATED" ]; then
+            echo "No files were translated."
+            echo "has_translations=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "$TRANSLATED" > /tmp/translated_files.txt
+            echo "has_translations=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit translations to PR branch
+        if: >
+          steps.detect.outputs.has_posts == 'true' &&
+          steps.translate.outputs.has_translations == 'true' &&
+          github.event_name == 'pull_request_target'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_BRANCH="${{ github.event.pull_request.head.ref }}"
+          PR_REPO="${{ github.event.pull_request.head.repo.full_name }}"
+
+          # Switch to the PR branch so we can push back
+          git fetch "https://x-access-token:${GITHUB_TOKEN}@github.com/${PR_REPO}.git" "$PR_BRANCH"
+          git checkout -B "$PR_BRANCH" FETCH_HEAD
+
+          # Apply the translated files generated on the main-based workspace
+          # They were written relative to GITHUB_WORKSPACE, so they're already in place
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stage each translated file and build a per-file commit
+          while IFS='|' read -r en_path title; do
+            [ -z "$en_path" ] && continue
+            git add "$en_path"
+            git commit -m "feat(i18n): auto-translate \"${title}\" to English"
+          done < /tmp/translated_files.txt
+
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${PR_REPO}.git" "$PR_BRANCH"
+
+      - name: Comment on PR
+        if: >
+          steps.detect.outputs.has_posts == 'true' &&
+          steps.translate.outputs.has_translations == 'true' &&
+          github.event_name == 'pull_request_target'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY="### English translation added automatically
+
+          The following English translation(s) were generated by AI and committed to this branch:
+
+          "
+          while IFS='|' read -r en_path title; do
+            [ -z "$en_path" ] && continue
+            BODY="${BODY}"$'\n'"- \`${en_path}\` — *${title}*"
+          done < /tmp/translated_files.txt
+
+          BODY="${BODY}"$'\n\n'"Please review the translation for accuracy before merging. You can edit the \`.en.md\` file directly in this PR."
+
+          gh pr comment ${{ github.event.pull_request.number }} --body "$BODY"
