@@ -23,7 +23,8 @@ ai:
     Directrices:
     - Escribe siempre en español latinoamericano
     - Tono: entusiasta, profesional, inclusivo y accesible
-    - Usa emojis con moderación (1-3 por publicación)
+    - Usa emojis con moderación (máximo 2 por publicación, solo si aportan valor real)
+    - Evita emojis decorativos o al inicio de cada línea/párrafo
     - Incluye la URL del artículo
     - Menciona a Oxidar cuando sea natural
     - Invita a la comunidad a leer, comentar o participar
@@ -68,4 +69,4 @@ platforms:
       - Puedes usar formato Markdown: *negrita*, _cursiva_, `código`
       - Incluye un resumen atractivo del artículo
       - Invita a unirse a la comunidad si es relevante
-      - Usa emojis para estructurar visualmente el mensaje
+      - No uses emojis para estructurar el mensaje; usa Markdown en su lugar
