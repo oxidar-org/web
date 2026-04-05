@@ -19,20 +19,27 @@ INDEX_FILE_PREFIX = "_"
 
 
 def get_new_post_files(repo_root: str | None = None) -> list[str]:
-    """Get list of added or modified markdown files in content/posts/ from git diff."""
-    cmd = [
-        "git", "diff", "--name-only", "--diff-filter=AM",
-        "HEAD~1", "HEAD", "--", "content/posts/**/*.md",
-    ]
-    result = subprocess.run(
-        cmd, capture_output=True, text=True,
-        cwd=repo_root,
-    )
-    if result.returncode != 0:
-        logger.error("git diff failed: %s", result.stderr)
-        return []
-    files = [f.strip() for f in result.stdout.strip().split("\n") if f.strip()]
-    return files
+    """Get list of added or modified markdown files in content/posts/ from git diff.
+
+    Falls back to HEAD~2 if HEAD~1 yields no Spanish posts, to handle rebase
+    merges where an auto-translate commit lands on top of the post commit.
+    """
+    for base in ("HEAD~1", "HEAD~2"):
+        cmd = [
+            "git", "diff", "--name-only", "--diff-filter=AM",
+            base, "HEAD", "--", "content/posts/**/*.md",
+        ]
+        result = subprocess.run(
+            cmd, capture_output=True, text=True,
+            cwd=repo_root,
+        )
+        if result.returncode != 0:
+            logger.error("git diff failed: %s", result.stderr)
+            return []
+        files = [f.strip() for f in result.stdout.strip().split("\n") if f.strip()]
+        if filter_post_files(files):
+            return files
+    return []
 
 
 def filter_post_files(files: list[str]) -> list[str]:

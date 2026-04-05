@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 3
 
       - name: Detect new posts
         id: detect
@@ -42,6 +42,11 @@ jobs:
           else
             NEW_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'content/posts/' | grep '\.md$' || true)
             POSTS=$(echo "$NEW_FILES" | grep -v '\.en\.md$' | grep -v '_index\.md' | grep -v '^$' || true)
+            # Fallback to HEAD~2 in case last commit is an auto-translate commit (rebase merge)
+            if [ -z "$POSTS" ]; then
+              NEW_FILES=$(git diff --name-only --diff-filter=A HEAD~2 HEAD -- 'content/posts/' | grep '\.md$' || true)
+              POSTS=$(echo "$NEW_FILES" | grep -v '\.en\.md$' | grep -v '_index\.md' | grep -v '^$' || true)
+            fi
             if [ -z "$POSTS" ]; then
               echo "No new posts detected."
               echo "has_posts=false" >> "$GITHUB_OUTPUT"
