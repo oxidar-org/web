@@ -1,6 +1,5 @@
 +++
 date = '2026-04-19T12:00:00-03:00'
-draft = true
 hiddenFromHomePage = false
 title = '¡Lo logramos! El Hackathon Snakear fue un éxito'
 description = "Crónica del Distributed Snake Challenge: más de 40 rustáceos se juntaron en Buenos Aires para hackear, competir, y poner a prueba un servidor que no cayó ni una sola vez."
