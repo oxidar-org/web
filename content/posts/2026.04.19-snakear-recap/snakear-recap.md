@@ -35,15 +35,17 @@ Nosotros, del otro lado, nos encontramos **mejorando el servidor en tiempo real*
 
 ## Los ganadores
 
-### 🏆 Hackathon
-
-<!-- TODO: completar con nombre/equipo ganador del hackathon -->
-**[EQUIPO/NOMBRE]** se llevó el primer puesto del hackathon con una implementación que [descripción breve de su solución].
-
 ### 🧠 Quiz de Rust
 
 <!-- TODO: completar con nombre del ganador del quiz -->
-El quiz de Rust del mediodía tuvo su propio campeón: **[NOMBRE]**, que demostró que el *Book* no alcanza — hay que haber sufrido el borrow checker de verdad.
+El quiz de Rust del mediodía tuvo su propio campeón: **Gaby**, que demostró que el *Book* no alcanza — hay que haber sufrido el borrow checker de verdad.
+
+<img src="/images/posts/snakear-recap/quiz.jpg" alt="Los ganadores del Quiz de Oxidar" style="width:100%; margin: 20px auto; display: block;">
+
+### 🏆 Hackathon
+
+<!-- TODO: completar con nombre/equipo ganador del hackathon -->
+**ClaudIA** se llevó el primer puesto del hackathon con una implementación que se destacó por analizar la estrategia de los demás competidoes y usarlo a su favor.
 
 <img src="/images/posts/snakear-recap/ganadores-hackathon.jpg" alt="Los ganadores del hackathon con los premios de Input Output" style="width:100%; margin: 20px auto; display: block;">
 
@@ -70,6 +72,8 @@ Gracias a **TxPipe** e **Input Output Global** por los premios, el espacio, y cr
 Más allá de los ganadores y el código, lo que nos llevamos es esto: una comunidad que crece, que aprende junta, y que se divierte rompiendo cosas en Rust.
 
 Fue el evento más ambicioso que organizamos, y salió bien. Eso nos da energía para seguir.
+
+Distruta de todas las [fotos](https://iog.pixieset.com/iog/) del evento, gracias a nuestros hosts!
 
 ---
 
