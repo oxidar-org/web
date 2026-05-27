@@ -37,6 +37,14 @@ Our main communication channel is our **Telegram group**, where:
 
 ---
 
+## 💬 Discord
+
+You can also find us on our **Discord server**:
+
+### **[🎮 Join Oxidar's Discord](https://discord.gg/EMpekX7en)**
+
+---
+
 ## 📧 Other ways to contact us
 
 ### Email
@@ -46,6 +54,7 @@ For general inquiries, collaboration proposals, or administrative matters:
 ### Social media
 - **GitHub**: [@oxidar-org](https://github.com/oxidar-org)
 - **LinkedIn**: [Oxidar](https://linkedin.com/company/oxidar-org)
+- **Discord**: [Oxidar](https://discord.gg/EMpekX7en)
 
 ---
 
