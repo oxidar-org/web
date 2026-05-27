@@ -1,15 +1,15 @@
 +++
-date = '2026-05-27T10:00:00-03:00'
+date = '2026-05-27T00:00:00-03:00'
 draft = true
 hiddenFromHomePage = false
 title = 'RustWeek 2026: la conferencia de Rust más grande del mundo'
-description = "Crónica de primera mano de RustWeek 2026 en Utrecht: más de 900 asistentes, 50 charlas, workshops y el Rust All-Hands."
+description = "Crónica de RustWeek 2026 en Utrecht: más de 900 asistentes, 50 charlas, workshops y el Rust All-Hands."
 tags = ["rust", "comunidad", "conferencia", "eventos"]
 categories = ["Eventos", "Comunidad"]
 translationKey = "rust-week-2026"
 +++
 
-La semana pasada viajé a **Utrecht, Países Bajos**, para asistir a **RustWeek 2026**, y volver a casa con la cabeza llena de ideas y la energía renovada para seguir construyendo con Rust.
+La semana pasada viajamos a **Utrecht, Países Bajos**, para asistir a **RustWeek 2026**, y volver a casa con la cabeza llena de ideas y la energía renovada para seguir construyendo con Rust.
 
 ![RustWeek 2026 — apertura en el Kinepolis de Utrecht](/images/rustweek26-apertura.jpeg)
 
@@ -19,17 +19,13 @@ RustWeek 2026 se presentó como **la conferencia de Rust más grande del mundo**
 
 La elección de Utrecht no es casual. La ciudad está en el corazón de los Países Bajos, con conexiones de tren directas desde el aeropuerto de Ámsterdam, lo que la hace accesible para quienes viajamos desde cualquier rincón del mundo.
 
-## La semana, día a día
-
-### Lunes: workshops
-
-El lunes arrancó con **8 workshops** en paralelo para grupos de hasta 150 personas. Un formato ideal para profundizar en temas específicos con instructores dedicados antes del ritmo intenso de los días de conferencia.
+## Los días de conferencia
 
 ### Martes y miércoles: la conferencia
 
 Los dos días centrales se desarrollaron en el **Kinepolis** con capacidad para 800 asistentes por día. Tres tracks simultáneos significaron que siempre había decisiones difíciles sobre qué sesión priorizar.
 
-Estas son las charlas que más me marcaron:
+Estas son las charlas que más nos marcaron:
 
 ---
 
@@ -47,7 +43,7 @@ Una de las más refrescantes del evento. La charla exploró la experiencia de en
 
 #### Completion-based IO
 
-Una charla técnica profunda sobre el modelo de I/O basado en **completions** (como io_uring en Linux), en contraste con el modelo tradicional basado en readiness que usan los runtimes async de Rust hoy. El speaker exploró los desafíos de integrar este modelo con el ecosistema async existente: las diferencias en cómo se manejan los buffers, la cancelación, y por qué la transición no es trivial. Para quienes trabajamos con sistemas donde la performance de I/O importa, fue una de las más relevantes de la semana.
+Una charla técnica profunda sobre el modelo de I/O basado en **completions** (como io_uring en Linux), en contraste con el modelo tradicional basado en readiness que usan los runtimes async de Rust hoy. Alice exploró los desafíos de integrar este modelo con el ecosistema async existente: las diferencias en cómo se manejan los buffers, la cancelación, y por qué la transición no es trivial. Para quienes trabajamos con sistemas donde la performance de I/O importa, fue una de las más relevantes de la semana.
 
 ---
 
@@ -73,25 +69,15 @@ También presentó datos concretos del descenso de vulnerabilidades de memoria e
 
 #### Interop is the New Rewrite: Design Axioms for Rust's Next Frontier
 
-**Taylor Cramer (Google)** cerró con una charla estratégica sobre el futuro de Rust. El argumento central: el próximo gran desafío de Rust no es reescribir sistemas en Rust, sino **interoperar con el mundo existente** — especialmente con C, que domina las interfaces de bajo nivel (system libraries, ABIs, linkers). Pero C no puede expresar ownership, lifetimes ni destructores, lo que crea una brecha semántica al cruzar el boundary.
+**Taylor Cramer (Google)** cerró con una charla estratégica sobre el futuro de Rust. El argumento central: el próximo gran desafío de Rust no es reescribir sistemas en Rust, sino **interoperar con el mundo existente** — especialmente con C++, que domina las interfaces de bajo nivel (system libraries, ABIs, linkers). Pero C++ no puede expresar ownership, lifetimes ni destructores, lo que crea una brecha semántica al cruzar el boundary.
 
 ![The Trouble with C Interop — Taylor Cramer](/images/rustweek26-c-interop.jpeg)
 
 La charla propuso axiomas de diseño concretos para guiar el trabajo futuro en este espacio. Un mapa de ruta para quienes trabajan en FFI o en integración de Rust en proyectos C/C++ existentes.
 
-### Jueves: hackathon
+## Qué nos llevamos
 
-El jueves fue el turno del **hackathon** en el DUS. Un día más relajado en cuanto a agenda, pero intenso en cuanto a código. Una buena oportunidad para conocer gente, colaborar en proyectos abiertos y poner en práctica lo aprendido durante los días anteriores.
-
-![Oxidar presente en RustWeek 2026](/images/rustweek26-oxidar-sign.jpeg)
-
-### Viernes y sábado: Rust All-Hands y Unconference
-
-El cierre de la semana fue el **segundo Rust Project All-Hands**, un espacio de invitación para los contribuidores del proyecto y miembros de los equipos de Rust. También hubo una unconference abierta para quienes nos quedamos hasta el final.
-
-## Qué me llevo
-
-Más allá de las charlas y los slides que se van a publicar, lo que más valoro de este tipo de eventos es la **gente**. Hablar con personas que usan Rust en contextos completamente distintos — sistemas embebidos, kernel, backend web, compiladores — y ver cómo se articulan las mismas herramientas para resolver problemas tan distintos es recordar por qué esta comunidad es especial.
+Más allá de las charlas y los slides que se van a publicar, lo que más valoramos de este tipo de eventos es la **gente**. Hablar con personas que usan Rust en contextos completamente distintos — sistemas embebidos, kernel, backend web, compiladores — y ver cómo se articulan las mismas herramientas para resolver problemas tan distintos es recordar por qué esta comunidad es especial.
 
 ![Estrategias para Rust: "Design holistically. Ship incrementally."](/images/rustweek26-strategies.jpeg)
 
