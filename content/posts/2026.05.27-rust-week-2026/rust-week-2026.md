@@ -49,7 +49,7 @@ Una charla técnica profunda sobre el modelo de I/O basado en **completions** (c
 
 #### Untrusted data in Linux — How Rust is going to save us
 
-**Greg Kroah-Hartman** de la Linux Foundation presentó uno de los keynotes más aplaudidos. El mensaje fue claro: Rust en el kernel Linux no es un experimento — es una necesidad. La charla detalló el trabajo de manejar **datos no confiables** que llegan del userspace, un área donde los bugs de memoria han causado vulnerabilidades críticas históricamente. Rust permite expresar esas invariantes directamente en el tipo sistema.
+**Greg Kroah-Hartman** de la Linux Foundation presentó uno de los keynotes más aplaudidos. El mensaje fue claro: Rust en el kernel Linux no es un experimento — es una necesidad. La charla detalló el trabajo de manejar **datos no confiables** que llegan del userspace, un área donde los bugs de memoria han causado vulnerabilidades críticas históricamente. Rust permite expresar esas invariantes directamente en el sistema de tipos.
 
 ![Greg Kroah-Hartman: "We need more Rust Linux developers!"](/images/rustweek26-linux-keynote.jpeg)
 
