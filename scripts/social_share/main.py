@@ -17,6 +17,7 @@ from issue_formatter import (
     format_issue_body,
     format_issue_title,
     parse_issue_body,
+    mark_platform_published,
     APPROVED_LABEL,
     PUBLISHED_LABEL,
     PENDING_LABEL,
@@ -234,7 +235,32 @@ def _publish_from_issue(issue_number: int, platform_map: dict) -> list[tuple]:
         return [("unknown", "github", "No messages found in issue body")]
 
     logger.info("Parsed %d message(s) from issue #%d", len(messages), issue_number)
-    return _publish_messages(messages, platform_map)
+
+    errors = []
+    current_body = issue["body"]
+    for msg in messages:
+        platform = platform_map.get(msg["platform"])
+        if not platform:
+            logger.info("Skipping %s (not enabled)", msg["platform"])
+            continue
+        try:
+            result = platform.publish(msg["text"], msg["post"])
+            if result.success:
+                logger.info("Published to %s: %s", msg["platform"], result.url)
+                current_body = mark_platform_published(current_body, msg["platform"])
+                requests.patch(
+                    f"{GITHUB_API}/repos/{repo}/issues/{issue_number}",
+                    headers=_github_headers(),
+                    json={"body": current_body},
+                    timeout=30,
+                )
+            else:
+                logger.error("Publish failed on %s: %s", msg["platform"], result.error)
+                errors.append((msg["post"]["title"], msg["platform"], result.error))
+        except Exception as e:
+            logger.error("Publish error on %s: %s", msg["platform"], e)
+            errors.append((msg["post"]["title"], msg["platform"], str(e)))
+    return errors
 
 
 def main():

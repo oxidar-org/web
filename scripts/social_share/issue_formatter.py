@@ -9,7 +9,10 @@ PLATFORM_EMOJIS: dict[str, str] = {
     "linkedin": "💼",
     "bluesky": "🦋",
     "telegram": "📢",
+    "instagram": "📸",
 }
+
+_PUBLISHED_MARKER = "✅"
 
 _EMOJI_TO_PLATFORM: dict[str, str] = {v: k for k, v in PLATFORM_EMOJIS.items()}
 
@@ -53,6 +56,19 @@ def format_issue_title(post_title: str) -> str:
     return f"{ISSUE_TITLE_PREFIX} {post_title}"
 
 
+def mark_platform_published(body: str, platform: str) -> str:
+    """Add a ✅ marker to the platform section header in the issue body."""
+    emoji = PLATFORM_EMOJIS.get(platform, "")
+    old = f"### {emoji} {platform.capitalize()}"
+    new = f"### {emoji} {platform.capitalize()} {_PUBLISHED_MARKER}"
+    return body.replace(old, new, 1)
+
+
+def is_platform_published(body: str, platform: str) -> bool:
+    emoji = PLATFORM_EMOJIS.get(platform, "")
+    return f"### {emoji} {platform.capitalize()} {_PUBLISHED_MARKER}" in body
+
+
 def parse_issue_body(body: str) -> tuple[dict, list[dict]]:
     """Parse a GitHub issue body into (post, messages).
 
@@ -70,10 +86,13 @@ def parse_issue_body(body: str) -> tuple[dict, list[dict]]:
     post = {"title": title, "url": url, "image_url": image_url}
     messages = []
 
-    # Match ### {emoji} {Platform}\n```\n{text}\n```
+    # Match ### {emoji} {Platform} [✅]\n```\n{text}\n```
     for match in re.finditer(r"###\s+([^\n]+)\n```\n(.*?)\n```", body, re.DOTALL):
         header = match.group(1).strip()
         text = match.group(2).strip()
+
+        if _PUBLISHED_MARKER in header:
+            continue
 
         platform = next(
             (plat for emoji, plat in _EMOJI_TO_PLATFORM.items() if emoji in header),
