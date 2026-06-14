@@ -24,14 +24,18 @@ class BlueskyPlatform(Platform):
     def name(self) -> str:
         return "bluesky"
 
+    _MAX_IMAGE_BYTES = 2_000_000  # Bluesky blob limit
+
     def publish(self, text: str, post: dict) -> PublishResult:
         try:
             image_url = post.get("image_url")
             if image_url:
                 resp = req.get(image_url, timeout=15)
                 resp.raise_for_status()
-                mime = resp.headers.get("content-type", "image/jpeg").split(";")[0]
-                response = self._client.send_image(text=text, image=resp.content, image_alt="")
+                if len(resp.content) <= self._MAX_IMAGE_BYTES:
+                    response = self._client.send_image(text=text, image=resp.content, image_alt="")
+                else:
+                    response = self._client.send_post(text=text)
             else:
                 response = self._client.send_post(text=text)
             return PublishResult(success=True, url=response.uri)
