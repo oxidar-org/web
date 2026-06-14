@@ -1,6 +1,6 @@
 +++
 date = '2026-05-27T00:00:00-03:00'
-draft = true
+draft = false
 hiddenFromHomePage = false
 title = 'RustWeek 2026: lo que nos trajimos de Utrecht'
 description = "Crónica de RustWeek 2026 en Utrecht: más de 900 asistentes, 50 charlas, workshops y el Rust All-Hands."
