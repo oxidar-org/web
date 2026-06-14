@@ -70,3 +70,14 @@ platforms:
       - Incluye un resumen atractivo del artículo
       - Invita a unirse a la comunidad si es relevante
       - No uses emojis para estructurar el mensaje; usa Markdown en su lugar
+
+  instagram:
+    max_chars: 2200
+    prompt_addendum: |
+      Formato Instagram:
+      - Máximo 2200 caracteres
+      - Tono visual y evocador: describe la experiencia, no solo el contenido
+      - Usa saltos de línea para separar ideas
+      - Incluye entre 5 y 10 hashtags relevantes al final (#Rust, #RustLang, #Programacion, etc.)
+      - Los hashtags van separados del cuerpo del texto por una línea en blanco
+      - No incluyas URLs en el cuerpo (van en la bio); podés mencionar "link en bio" si aplica

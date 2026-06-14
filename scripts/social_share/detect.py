@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 import sys
 from pathlib import Path
 
@@ -20,6 +21,12 @@ from shared.detect import (  # noqa: E402
 logger = logging.getLogger("social_share")
 
 BODY_EXCERPT_MAX_CHARS = 2000
+_IMAGE_RE = re.compile(r'!\[.*?\]\((/[^)]+\.(?:jpe?g|png|gif|webp))\)', re.IGNORECASE)
+
+
+def _extract_first_image(body: str, base_url: str) -> str | None:
+    match = _IMAGE_RE.search(body)
+    return (base_url.rstrip("/") + match.group(1)) if match else None
 
 __all__ = [
     "get_new_post_files",
@@ -81,6 +88,7 @@ def detect_new_posts(
             "body": body_excerpt,
             "url": derive_url(f, base_url),
             "file": f,
+            "image_url": _extract_first_image(body, base_url),
         })
 
     return posts

@@ -13,6 +13,7 @@ _PLATFORM_REGISTRY: dict[str, tuple[str, str]] = {
     "LINKEDIN": (".linkedin", "LinkedInPlatform"),
     "BLUESKY": (".bluesky", "BlueskyPlatform"),
     "TELEGRAM": (".telegram", "TelegramPlatform"),
+    "INSTAGRAM": (".instagram", "InstagramPlatform"),
 }
 
 ALL_PLATFORM_NAMES: list[str] = [key.lower() for key in _PLATFORM_REGISTRY]

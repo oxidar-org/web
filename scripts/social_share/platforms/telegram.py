@@ -23,14 +23,19 @@ class TelegramPlatform(Platform):
         return "telegram"
 
     def publish(self, text: str, post: dict) -> PublishResult:
-        url = f"https://api.telegram.org/bot{self._bot_token}/sendMessage"
+        image_url = post.get("image_url")
+        if image_url:
+            return self._send_photo(image_url, text)
+        return self._send_message(text)
+
+    def _send_photo(self, image_url: str, caption: str) -> PublishResult:
+        url = f"https://api.telegram.org/bot{self._bot_token}/sendPhoto"
         payload = {
             "chat_id": self._chat_id,
-            "text": text,
+            "photo": image_url,
+            "caption": caption,
             "parse_mode": "Markdown",
-            "disable_web_page_preview": False,
         }
-
         try:
             resp = self._session.post(url, json=payload, timeout=30)
             data = resp.json()
@@ -40,8 +45,23 @@ class TelegramPlatform(Platform):
         if data.get("ok"):
             msg_id = data.get("result", {}).get("message_id", "")
             return PublishResult(success=True, url=str(msg_id))
-        else:
-            return PublishResult(
-                success=False,
-                error=data.get("description", "Unknown Telegram error"),
-            )
+        return PublishResult(success=False, error=data.get("description", "Unknown Telegram error"))
+
+    def _send_message(self, text: str) -> PublishResult:
+        url = f"https://api.telegram.org/bot{self._bot_token}/sendMessage"
+        payload = {
+            "chat_id": self._chat_id,
+            "text": text,
+            "parse_mode": "Markdown",
+            "disable_web_page_preview": False,
+        }
+        try:
+            resp = self._session.post(url, json=payload, timeout=30)
+            data = resp.json()
+        except (requests.RequestException, ValueError) as e:
+            return PublishResult(success=False, error=str(e))
+
+        if data.get("ok"):
+            msg_id = data.get("result", {}).get("message_id", "")
+            return PublishResult(success=True, url=str(msg_id))
+        return PublishResult(success=False, error=data.get("description", "Unknown Telegram error"))

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import requests as req
+
 from atproto import Client
 
 from .base import Platform, PublishResult, require_env
@@ -24,7 +26,14 @@ class BlueskyPlatform(Platform):
 
     def publish(self, text: str, post: dict) -> PublishResult:
         try:
-            response = self._client.send_post(text=text)
+            image_url = post.get("image_url")
+            if image_url:
+                resp = req.get(image_url, timeout=15)
+                resp.raise_for_status()
+                mime = resp.headers.get("content-type", "image/jpeg").split(";")[0]
+                response = self._client.send_image(text=text, image=resp.content, image_alt="", image_mime_type=mime)
+            else:
+                response = self._client.send_post(text=text)
             return PublishResult(success=True, url=response.uri)
         except Exception as e:
             return PublishResult(success=False, error=str(e))

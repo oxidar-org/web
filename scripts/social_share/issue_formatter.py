@@ -24,6 +24,10 @@ def format_issue_body(post: dict, messages: list[dict]) -> str:
     lines = [
         f"## {post['title']}",
         f"🔗 {post['url']}",
+    ]
+    if post.get("image_url"):
+        lines.append(f"🖼️ {post['image_url']}")
+    lines += [
         "",
         "---",
         "",
@@ -60,7 +64,10 @@ def parse_issue_body(body: str) -> tuple[dict, list[dict]]:
     title_match = re.search(r"^##\s+(.+)$", body, re.MULTILINE)
     title = title_match.group(1).strip() if title_match else ""
 
-    post = {"title": title, "url": url}
+    image_match = re.search(r"🖼️\s+(https?://\S+)", body)
+    image_url = image_match.group(1).strip() if image_match else ""
+
+    post = {"title": title, "url": url, "image_url": image_url}
     messages = []
 
     # Match ### {emoji} {Platform}\n```\n{text}\n```
