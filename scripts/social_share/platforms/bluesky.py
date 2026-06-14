@@ -31,7 +31,7 @@ class BlueskyPlatform(Platform):
                 resp = req.get(image_url, timeout=15)
                 resp.raise_for_status()
                 mime = resp.headers.get("content-type", "image/jpeg").split(";")[0]
-                response = self._client.send_image(text=text, image=resp.content, image_alt="", image_mime_type=mime)
+                response = self._client.send_image(text=text, image=resp.content, image_alt="")
             else:
                 response = self._client.send_post(text=text)
             return PublishResult(success=True, url=response.uri)
