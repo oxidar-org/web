@@ -2,7 +2,7 @@
 date = '2026-05-27T00:00:00-03:00'
 draft = true
 hiddenFromHomePage = false
-title = 'RustWeek 2026: la conferencia de Rust más grande del mundo'
+title = 'RustWeek 2026: lo que nos trajimos de Utrecht'
 description = "Crónica de RustWeek 2026 en Utrecht: más de 900 asistentes, 50 charlas, workshops y el Rust All-Hands."
 tags = ["rust", "comunidad", "conferencia", "eventos"]
 categories = ["Eventos", "Comunidad"]
@@ -39,11 +39,15 @@ Una de las más refrescantes del evento. La charla exploró la experiencia de en
 
 ![](/images/rustweek26-believe-rust.jpeg)
 
+{{< youtube 8iy37I0WE_s >}}
+
 ---
 
 #### Completion-based IO
 
 Una charla técnica profunda sobre el modelo de I/O basado en **completions** (como io_uring en Linux), en contraste con el modelo tradicional basado en readiness que usan los runtimes async de Rust hoy. Alice exploró los desafíos de integrar este modelo con el ecosistema async existente: las diferencias en cómo se manejan los buffers, la cancelación, y por qué la transición no es trivial. Para quienes trabajamos con sistemas donde la performance de I/O importa, fue una de las más relevantes de la semana.
+
+{{< youtube CmLAHUuUsAQ >}}
 
 ---
 
@@ -57,6 +61,8 @@ También presentó datos concretos del descenso de vulnerabilidades de memoria e
 
 ![Datos sobre el descenso de vulnerabilidades de memoria](/images/rustweek26-memory-safety.jpeg)
 
+{{< youtube Nzmj7K0FNRY >}}
+
 ---
 
 #### Obsessive Optimization with String Interning
@@ -64,6 +70,8 @@ También presentó datos concretos del descenso de vulnerabilidades de memoria e
 **Arya Dradjica** presentó una de las charlas más entretenidas del track de performance. Arrancó con un problema aparentemente simple — strings repetidos que se comparan frecuentemente — y fue construyendo capas de optimización, midiendo a cada paso con benchmarks reales. La metodología fue ejemplar: usar `perf`, analizar accesos a cache L1, medir ciclos por iteración. Una clase magistral de cómo se hace performance engineering en Rust sin adivinar.
 
 ![Obsessive Optimization with String Interning — Arya Dradjica](/images/rustweek26-string-interning.jpeg)
+
+{{< youtube SWRL4JpaR2I >}}
 
 ---
 
@@ -74,6 +82,8 @@ También presentó datos concretos del descenso de vulnerabilidades de memoria e
 ![The Trouble with C Interop — Taylor Cramer](/images/rustweek26-c-interop.jpeg)
 
 La charla propuso axiomas de diseño concretos para guiar el trabajo futuro en este espacio. Un mapa de ruta para quienes trabajan en FFI o en integración de Rust en proyectos C/C++ existentes.
+
+{{< youtube 1NnCJTVYPA4 >}}
 
 ## Qué nos llevamos
 
@@ -93,7 +103,7 @@ Y para terminar, un detalle que resume bien el espíritu de la conferencia: entr
 
 ## Las charlas ya están disponibles
 
-Las grabaciones de las charlas se van a publicar en el canal de YouTube de la Rust Foundation. Mientras tanto, podés revisar el programa completo en [2026.rustweek.org](https://2026.rustweek.org).
+Las grabaciones ya están publicadas en el [canal de YouTube de RustNL](https://www.youtube.com/@RustNL). También podés revisar el programa completo en [2026.rustweek.org](https://2026.rustweek.org).
 
 ---
 
