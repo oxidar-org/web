@@ -102,7 +102,7 @@ And to finish, a detail that sums up the spirit of the conference: among the pos
 
 ## The Talks Are Now Available
 
-Recordings are already published on the [RustNL YouTube channel](https://www.youtube.com/@rustnederlandrustnl). You can also check out the full program at [2026.rustweek.org](https://2026.rustweek.org).
+Recordings are already published on the [RustNL YouTube channel](https://www.youtube.com/@RustNL). You can also check out the full program at [2026.rustweek.org](https://2026.rustweek.org).
 
 ---
 
