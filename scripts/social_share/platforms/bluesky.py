@@ -29,8 +29,8 @@ class BlueskyPlatform(Platform):
         return "bluesky"
 
     def _compress_image(self, data: bytes) -> bytes:
-        from PIL import Image
-        img = Image.open(BytesIO(data))
+        from PIL import Image, ImageOps
+        img = ImageOps.exif_transpose(Image.open(BytesIO(data)))
         if img.mode in ("RGBA", "P"):
             img = img.convert("RGB")
         for quality in (85, 70, 55, 40):
