@@ -103,7 +103,7 @@ Y para terminar, un detalle que resume bien el espíritu de la conferencia: entr
 
 ## Las charlas ya están disponibles
 
-Las grabaciones ya están publicadas en el [canal de YouTube de RustNL](https://www.youtube.com/@RustNL). También podés revisar el programa completo en [2026.rustweek.org](https://2026.rustweek.org).
+Las grabaciones ya están publicadas en el [canal de YouTube de RustNL](https://www.youtube.com/@rustnederlandrustnl). También podés revisar el programa completo en [2026.rustweek.org](https://2026.rustweek.org).
 
 ---
 
