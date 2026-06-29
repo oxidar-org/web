@@ -56,11 +56,12 @@ def format_issue_title(post_title: str) -> str:
     return f"{ISSUE_TITLE_PREFIX} {post_title}"
 
 
-def mark_platform_published(body: str, platform: str) -> str:
-    """Add a ✅ marker to the platform section header in the issue body."""
+def mark_platform_published(body: str, platform: str, url: str = "") -> str:
+    """Add a ✅ marker (and optional post URL) to the platform section header."""
     emoji = PLATFORM_EMOJIS.get(platform, "")
     old = f"### {emoji} {platform.capitalize()}"
-    new = f"### {emoji} {platform.capitalize()} {_PUBLISHED_MARKER}"
+    suffix = f" {_PUBLISHED_MARKER} {url}" if url else f" {_PUBLISHED_MARKER}"
+    new = f"### {emoji} {platform.capitalize()}{suffix}"
     return body.replace(old, new, 1)
 
 

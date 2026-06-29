@@ -247,7 +247,7 @@ def _publish_from_issue(issue_number: int, platform_map: dict) -> list[tuple]:
             result = platform.publish(msg["text"], msg["post"])
             if result.success:
                 logger.info("Published to %s: %s", msg["platform"], result.url)
-                current_body = mark_platform_published(current_body, msg["platform"])
+                current_body = mark_platform_published(current_body, msg["platform"], result.url or "")
                 requests.patch(
                     f"{GITHUB_API}/repos/{repo}/issues/{issue_number}",
                     headers=_github_headers(),

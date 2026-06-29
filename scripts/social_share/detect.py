@@ -21,11 +21,12 @@ from shared.detect import (  # noqa: E402
 logger = logging.getLogger("social_share")
 
 BODY_EXCERPT_MAX_CHARS = 2000
-_IMAGE_RE = re.compile(r'!\[.*?\]\((/[^)]+\.(?:jpe?g|png|gif|webp))\)', re.IGNORECASE)
+_MD_IMAGE_RE = re.compile(r'!\[.*?\]\((/[^)]+\.(?:jpe?g|png|gif|webp))\)', re.IGNORECASE)
+_HTML_IMAGE_RE = re.compile(r'<img[^>]+src=["\'](/[^"\']+\.(?:jpe?g|png|gif|webp))["\']', re.IGNORECASE)
 
 
 def _extract_first_image(body: str, base_url: str) -> str | None:
-    match = _IMAGE_RE.search(body)
+    match = _MD_IMAGE_RE.search(body) or _HTML_IMAGE_RE.search(body)
     return (base_url.rstrip("/") + match.group(1)) if match else None
 
 __all__ = [
