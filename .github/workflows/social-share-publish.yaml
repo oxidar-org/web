@@ -75,13 +75,11 @@ jobs:
             --config .github/social-media-config.yaml \
             --from-issue ${{ github.event.issue.number }}
 
-      - name: Mark as published and close issue
+      - name: Mark as published
         if: steps.check.outputs.already_published == 'false'
         run: |
           gh issue edit ${{ github.event.issue.number }} \
             --add-label "social: published" \
-            --repo ${{ github.repository }}
-          gh issue close ${{ github.event.issue.number }} \
             --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
