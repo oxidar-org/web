@@ -9,7 +9,7 @@ categories = ["Eventos"]
 translationKey = "debconf26"
 +++
 
-**Nos invitaron a dar una charla en [DebConf 26](https://debconf26.debconf.org)**, la conferencia anual de la comunidad Debian. Vamos a llevar la posta de Rust en Latinoamérica a uno de los eventos más importantes del mundo open-source, así que estamos re contentos.
+**Presentaremos una charla en [DebConf 26](https://debconf26.debconf.org)**, la conferencia anual de la comunidad Debian. Vamos a llevar la posta de Rust en Latinoamérica a uno de los eventos más importantes del mundo open-source, así que estamos re contentos.
 
 <img src="/images/posts/debconf26/flyer.png" alt="Oxidar va a DebConf 26: Por qué, Quiénes y Dónde en Rust" style="width:100%; max-width:450px; margin: 20px auto; display: block;">
 
