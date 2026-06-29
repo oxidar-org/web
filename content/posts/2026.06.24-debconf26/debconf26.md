@@ -19,7 +19,7 @@ Así se llama la presentación, y la pensamos para una audiencia que vive y resp
 
 ### Por qué Rust está ganando terreno
 
-Arrancamos repasando los fallos clásicos de C/C++: invalidación de iteradores, comportamiento indefinido, falta de seguridad de hilos. Cosas con las que cualquiera que programó sistemas de bajo nivel se cruzó alguna vez. A partir de ahí mostramos cómo el borrow checker y el sistema de tipos de Rust agarran un montón de esos errores en tiempo de compilación, antes de que lleguen a producción. Y de paso repasamos cómo Rust podría haber evitado un bardo real como **Heartbleed**.
+Arrancamos repasando los fallos clásicos de C/C++: invalidación de iteradores, comportamiento indefinido, falta de seguridad de hilos. Cosas con las que cualquiera que programó sistemas de bajo nivel se cruzó alguna vez. A partir de ahí mostramos cómo el borrow checker y el sistema de tipos de Rust agarran un montón de esos errores en tiempo de compilación, antes de que lleguen a producción. Y de paso repasamos cómo Rust podría haber evitado un problema real como **Heartbleed**.
 
 ### Quién lo está usando
 
