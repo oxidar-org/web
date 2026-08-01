@@ -31,9 +31,55 @@ Creemos en una comunidad que:
 
 ---
 
-## Sobre el cuidado de la comunidad
+## 🤝 ¿Cómo puedes participar?
+
+La comunidad **Oxidar** está formada por quienes participan. No necesitas ningún requisito formal para sumarte:
+
+### Para desarrolladores
+- Comparte tus proyectos en Rust
+- Ayuda a otros miembros con dudas técnicas
+- Participa en code reviews y colaboraciones
+- Propón y lidera workshops o charlas
+
+### Para estudiantes y principiantes
+- Haz preguntas y aprende de la comunidad
+- Comparte tu progreso de aprendizaje
+- Participa en proyectos grupales para practicar
+- Ayuda a traducir recursos al español
+
+### Para organizadores
+- Propón y coordina eventos locales
+- Ayuda con la logística de meetups
+- Conecta con otras comunidades tech
+- Contribuye a la comunicación y difusión
+
+### Para creadores de contenido
+- Escribe artículos y tutoriales
+- Crea videos educativos
+- Traduce documentación oficial
+- Comparte recursos de aprendizaje
+
+¿Te sumás? Escribinos desde la página de [Contacto](/contact/).
+
+---
+
+## 🌟 Valores de la comunidad
+
+Al unirte a **Oxidar**, te comprometes a:
+
+- **Respetar** a todas las personas, independiente de su nivel técnico
+- **Colaborar** de manera constructiva y solidaria
+- **Incluir** y dar la bienvenida a nuevos miembros
+- **Compartir** conocimiento de forma abierta y gratuita
+- **Mantener** un ambiente seguro y amigable para todos
+
+---
+
+## 📝 Código de Conducta
 
 Oxidar adhiere a un **Código de Conducta** que pone en el centro el respeto, la inclusión y el trato justo entre todas las personas. No toleramos actitudes discriminatorias, abusivas o violentas, y nos comprometemos a construir espacios seguros y amigables para todos.
+
+Al participar en cualquiera de nuestros espacios (Telegram, Discord, eventos, repositorios), aceptas seguir estas normas de convivencia.
 
 ---
 

@@ -1,0 +1,15 @@
+// ==============================
+// Custom style
+// ==============================
+
+// Public meets & events calendar (see layouts/shortcodes/calendar.html)
+.calendar-embed {
+  margin: 1rem 0;
+  width: 100%;
+
+  iframe {
+    border-radius: 0.5rem;
+    display: block;
+    max-width: 100%;
+  }
+}
