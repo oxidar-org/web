@@ -25,13 +25,19 @@ Las slides incluyen:
 
 ## Por qué Rust está ganando terreno
 
+![Repasando ejemplos de código y los fallos clásicos de C/C++](/images/debconf26-por-que-rust.jpeg)
+
 **Nicolás Antinori** comienza con las razones por las cuales Rust está ganando terreno. Al examinar los fallos comunes de C/C++ (invalidación de iteradores, comportamiento indefinido, falta de seguridad de hilos), muestra cómo el borrow checker y el sistema de tipos de Rust detectan categorías enteras de errores en tiempo de compilación. También veremos cómo Rust podría haber evitado fallos del mundo real como **Heartbleed**.
 
 ## Quién lo está usando realmente
 
+![Datos de adopción de Rust en Google presentados durante la charla](/images/debconf26-quien-usa-rust.jpeg)
+
 **Hernán G. Gonzalez** continúa con quién lo está usando realmente. Rust ya está en el **kernel de Linux**, y organizaciones como **Google, Microsoft y Canonical** lo utilizan en producción. Estos no son experimentos: demuestran que el lenguaje está listo para el tipo de infraestructura que mantenemos todos los días.
 
 ## Cómo involucrarse
+
+![Nicolás Antinori y Hernán G. Gonzalez durante la charla en DebConf 26](/images/debconf26-charla-apertura.jpeg)
 
 Finalmente, hablamos sobre cómo involucrarse. La comunidad de Rust es activa y acogedora, y compartimos recursos para encontrar soporte, contribuir a proyectos de Rust de código abierto y conectar con otros Rustaceans.
 
