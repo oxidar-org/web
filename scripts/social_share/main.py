@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from config import load_config, get_ai_provider_name, get_base_url
 from detect import detect_new_posts
 from ai import get_ai_provider
+from ai.base import append_url, build_length_feedback, effective_length, text_budget
 from platforms import get_enabled_platforms, ALL_PLATFORM_NAMES
 from issue_formatter import (
     format_issue_body,
@@ -39,20 +40,65 @@ def _github_headers() -> dict:
     }
 
 
+def _generate_within_budget(post: dict, platform_name: str, ai, config: dict) -> str | None:
+    """Generate text for one platform, retrying once if it overshoots.
+
+    Models count characters imprecisely, so a first attempt can land over the
+    limit. Retry once with the measured overshoot — a concrete number lands
+    better than restating the budget it just missed. Returns None if the retry
+    also overshoots, so an over-limit message is never published.
+    """
+    max_chars = config.get("platforms", {}).get(platform_name, {}).get("max_chars", FALLBACK_MAX_CHARS)
+    budget = text_budget(post, platform_name, config)
+
+    raw = ai.generate(post, platform_name, config)
+    if len(raw) > budget:
+        logger.info(
+            "Text for %s/%s is %d chars over budget (%d/%d) — retrying",
+            post["title"], platform_name, len(raw) - budget, len(raw), budget,
+        )
+        raw = ai.generate(post, platform_name, config, feedback=build_length_feedback(len(raw), budget))
+
+    # The model writes to a budget that excludes the URL; the URL is appended
+    # here so it can never be mangled or counted wrong.
+    text = append_url(raw, post, platform_name, config)
+    length = effective_length(text, post, platform_name, config)
+    if length > max_chars:
+        # Truncating cuts the trailing URL mid-string and publishes a dead
+        # link. Drop the message instead and let review catch it.
+        logger.error(
+            "Text for %s/%s is %d chars after retry, over the %d limit — dropping message",
+            post["title"], platform_name, length, max_chars,
+        )
+        return None
+    return text
+
+
 def _generate_messages(posts: list[dict], ai, config: dict, platform_names: list[str]) -> list[dict]:
     """Generate messages for each post × platform. Returns list of {post, platform, text}."""
     messages = []
+    attempts = 0
     for post in posts:
         for platform_name in platform_names:
+            attempts += 1
             try:
-                text = ai.generate(post, platform_name, config)
-                max_chars = config.get("platforms", {}).get(platform_name, {}).get("max_chars", FALLBACK_MAX_CHARS)
-                if len(text) > max_chars:
-                    logger.warning("Text for %s exceeds limit (%d), truncating", platform_name, max_chars)
-                    text = text[:max_chars]
+                text = _generate_within_budget(post, platform_name, ai, config)
+                if text is None:
+                    continue
                 messages.append({"post": post, "platform": platform_name, "text": text})
             except Exception as e:
                 logger.error("AI generation failed for %s/%s: %s", post["title"], platform_name, e)
+
+    failures = attempts - len(messages)
+    if attempts and not messages:
+        # Every call failed — almost always a dead/misconfigured AI provider.
+        # Exit non-zero so CI surfaces it instead of reporting a green no-op.
+        logger.error(
+            "All %d AI generation attempt(s) failed — check AI_PROVIDER and its credentials.", attempts
+        )
+        sys.exit(1)
+    if failures:
+        logger.warning("%d of %d AI generation attempt(s) failed", failures, attempts)
     return messages
 
 

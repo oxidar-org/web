@@ -22,11 +22,11 @@ class AnthropicProvider(AIProvider):
             raise ValueError("ANTHROPIC_API_KEY environment variable is required")
         return cls(client=anthropic.Anthropic(api_key=api_key))
 
-    def generate(self, post: dict, platform_name: str, config: dict) -> str:
+    def generate(self, post: dict, platform_name: str, config: dict, feedback: str = "") -> str:
         ai_config = config.get("ai", {}).get("anthropic", {})
         model = ai_config.get("model", "claude-sonnet-4-5-20250929")
         system_prompt = config.get("ai", {}).get("system_prompt", "")
-        user_prompt = build_user_prompt(post, platform_name, config)
+        user_prompt = build_user_prompt(post, platform_name, config, feedback)
 
         message = self._client.messages.create(
             model=model,
