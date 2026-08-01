@@ -70,7 +70,22 @@ def append_url(text: str, post: dict, platform_name: str, config: dict) -> str:
     return f"{text.rstrip()}{URL_SEPARATOR}{url}"
 
 
-def build_user_prompt(post: dict, platform_name: str, config: dict) -> str:
+def build_length_feedback(previous_length: int, budget: int) -> str:
+    """Correction block telling the model exactly how far over it went.
+
+    A concrete measurement lands better than restating the abstract budget,
+    which the model already failed to hit once.
+    """
+    excess = previous_length - budget
+    return (
+        f"CORRECCIÓN: tu respuesta anterior tenía {previous_length} caracteres, "
+        f"{excess} más que el límite de {budget}.\n"
+        f"Escribí una versión más corta que quepa en {budget} caracteres. "
+        f"Sacá hashtags, adjetivos o una oración entera si hace falta."
+    )
+
+
+def build_user_prompt(post: dict, platform_name: str, config: dict, feedback: str = "") -> str:
     """Build the user prompt combining post data and platform rules."""
     platform_config = config.get("platforms", {}).get(platform_name, {})
     addendum = platform_config.get("prompt_addendum", "")
@@ -103,6 +118,7 @@ Reglas de la plataforma:
 LÍMITE ESTRICTO: tu respuesta debe tener {budget} caracteres o menos.
 Antes de responder, contá los caracteres y acortá el texto si te pasaste.
 Es preferible un mensaje más corto que uno que exceda el límite.
+{feedback}
 
 Responde SOLO con el texto de la publicación."""
 
@@ -111,5 +127,5 @@ class AIProvider(ABC):
     """Abstract base class for AI text generation providers."""
 
     @abstractmethod
-    def generate(self, post: dict, platform_name: str, config: dict) -> str:
+    def generate(self, post: dict, platform_name: str, config: dict, feedback: str = "") -> str:
         """Generate social media text for a post on a given platform."""

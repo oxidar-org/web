@@ -85,9 +85,9 @@ class ClaudeCLIProvider(AIProvider):
             )
         return cls(binary=binary)
 
-    def generate(self, post: dict, platform_name: str, config: dict) -> str:
+    def generate(self, post: dict, platform_name: str, config: dict, feedback: str = "") -> str:
         ai_config = config.get("ai", {}).get("claude_cli", {})
         model = ai_config.get("model", DEFAULT_MODEL)
         system_prompt = config.get("ai", {}).get("system_prompt", "")
-        user_prompt = build_user_prompt(post, platform_name, config)
+        user_prompt = build_user_prompt(post, platform_name, config, feedback)
         return run_claude_cli(system_prompt, user_prompt, model, binary=self._binary)

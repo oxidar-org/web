@@ -21,13 +21,20 @@ CONFIG = {
 
 
 class FakeAI:
-    """Returns canned text per platform, or raises if the value is an Exception."""
+    """Returns canned text per platform, or raises if the value is an Exception.
+
+    A list value yields one entry per call, so retries can return something
+    different from the first attempt.
+    """
 
     def __init__(self, by_platform: dict):
-        self._by_platform = by_platform
+        self._by_platform = {k: list(v) if isinstance(v, list) else [v] for k, v in by_platform.items()}
+        self.calls: list[tuple[str, str]] = []
 
-    def generate(self, post, platform_name, config):
-        value = self._by_platform[platform_name]
+    def generate(self, post, platform_name, config, feedback=""):
+        self.calls.append((platform_name, feedback))
+        queue = self._by_platform[platform_name]
+        value = queue.pop(0) if len(queue) > 1 else queue[0]
         if isinstance(value, Exception):
             raise value
         return value
@@ -52,6 +59,43 @@ class TestLengthLimit:
         ai = FakeAI({"bluesky": "y" * 50})
         messages = _generate_messages([POST], ai, CONFIG, ["bluesky"])
         assert len(messages) == 1
+
+
+class TestRetryOnOvershoot:
+    def test_does_not_retry_when_first_attempt_fits(self):
+        ai = FakeAI({"bluesky": "corto"})
+        _generate_messages([POST], ai, CONFIG, ["bluesky"])
+        assert len(ai.calls) == 1
+        assert ai.calls[0][1] == ""  # no feedback on a first attempt
+
+    def test_retries_once_when_over_budget(self):
+        ai = FakeAI({"bluesky": ["x" * 80, "corto"]})
+        messages = _generate_messages([POST], ai, CONFIG, ["bluesky"])
+        assert len(ai.calls) == 2
+        assert [m["text"] for m in messages] == ["corto"]
+
+    def test_retry_feedback_states_measured_overshoot(self):
+        ai = FakeAI({"bluesky": ["x" * 80, "corto"]})
+        _generate_messages([POST], ai, CONFIG, ["bluesky"])
+
+        feedback = ai.calls[1][1]
+        assert "80" in feedback  # what it actually wrote
+        assert "50" in feedback  # the budget
+        assert "30" in feedback  # how far over
+
+    def test_drops_when_retry_also_overshoots(self):
+        # telegram succeeds so this exercises the drop, not the all-failed exit.
+        ai = FakeAI({"bluesky": ["x" * 80, "y" * 70], "telegram": "ok"})
+        messages = _generate_messages([POST], ai, CONFIG, ["bluesky", "telegram"])
+
+        bluesky_calls = [c for c in ai.calls if c[0] == "bluesky"]
+        assert len(bluesky_calls) == 2  # retried exactly once, no loop
+        assert [m["platform"] for m in messages] == ["telegram"]
+
+    def test_retry_failure_propagates_as_generation_failure(self):
+        ai = FakeAI({"bluesky": ["x" * 80, RuntimeError("boom")], "telegram": "ok"})
+        messages = _generate_messages([POST], ai, CONFIG, ["bluesky", "telegram"])
+        assert [m["platform"] for m in messages] == ["telegram"]
 
 
 class TestFailureHandling:
