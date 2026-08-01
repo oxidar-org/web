@@ -15,7 +15,7 @@ translationKey = "raytracing-rust"
 
 ## La charla: De C++ a Rust, reescribiendo un Ray Tracer
 
-Gonzalo va a contar cómo fue meterse de lleno en Rust reescribiendo un ray tracer desarrollado originalmente en C++. A partir de esa experiencia, va a mostrar cómo fue el proceso de ir trasladando las ideas de un lenguaje al otro, y cómo el proyecto le permitió entender, en la práctica, conceptos como ownership, borrowing, type safety, mutabilidad, smart pointers y SIMD.
+Gonzalo contará cómo fue meterse de lleno en Rust reescribiendo un ray tracer desarrollado originalmente en C++. A partir de esa experiencia, mostrará cómo fue el proceso de ir trasladando las ideas de un lenguaje al otro, y cómo el proyecto le permitió entender, en la práctica, conceptos como ownership, borrowing, type safety, mutabilidad, smart pointers y SIMD.
 
 Además mostrará benchmarks, para ver cuánto rendimiento se gana o se pierde al cambiar de lenguaje y al meterle más complejidad de diseño. Y va a cerrar con la pregunta que probablemente todos nos hicimos alguna vez: ¿Vale la pena aprender Rust, o lo que realmente vale es lo que te enseña sobre programar en general?
 
