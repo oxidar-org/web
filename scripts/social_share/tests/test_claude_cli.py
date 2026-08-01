@@ -58,7 +58,8 @@ class TestGenerate:
         # Platform rules and post data ride in the user prompt.
         assert "Formato Twitter" in captured["input"]
         assert "Rust en DebConf 26" in captured["input"]
-        assert "280" in captured["input"]
+        # The budget shown is max_chars minus the reserved URL, not max_chars.
+        assert str(280 - len(POST["url"]) - 2) in captured["input"]
 
     def test_falls_back_to_default_model(self, authed, monkeypatch):
         captured = {}

@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from config import load_config, get_ai_provider_name, get_base_url
 from detect import detect_new_posts
 from ai import get_ai_provider
+from ai.base import append_url, effective_length
 from platforms import get_enabled_platforms, ALL_PLATFORM_NAMES
 from issue_formatter import (
     format_issue_body,
@@ -48,13 +49,17 @@ def _generate_messages(posts: list[dict], ai, config: dict, platform_names: list
             attempts += 1
             try:
                 text = ai.generate(post, platform_name, config)
+                # The model writes to a budget that excludes the URL; the URL is
+                # appended here so it can never be mangled or counted wrong.
+                text = append_url(text, post, platform_name, config)
                 max_chars = config.get("platforms", {}).get(platform_name, {}).get("max_chars", FALLBACK_MAX_CHARS)
-                if len(text) > max_chars:
+                length = effective_length(text, post, platform_name, config)
+                if length > max_chars:
                     # Truncating cuts the trailing URL mid-string and publishes a
                     # dead link. Drop the message instead and let review catch it.
                     logger.error(
                         "Text for %s/%s is %d chars, over the %d limit — dropping message",
-                        post["title"], platform_name, len(text), max_chars,
+                        post["title"], platform_name, length, max_chars,
                     )
                     continue
                 messages.append({"post": post, "platform": platform_name, "text": text})

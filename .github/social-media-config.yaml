@@ -27,7 +27,7 @@ ai:
     - Tono: entusiasta, profesional, inclusivo y accesible
     - Usa emojis con moderación (máximo 2 por publicación, solo si aportan valor real)
     - Evita emojis decorativos o al inicio de cada línea/párrafo
-    - Incluye la URL del artículo
+    - No incluyas URLs; el enlace se agrega automáticamente
     - Menciona a Oxidar cuando sea natural
     - Invita a la comunidad a leer, comentar o participar
     - No uses hashtags inventados; usa solo los relevantes al tema
@@ -36,18 +36,17 @@ ai:
 platforms:
   twitter:
     max_chars: 280
+    # t.co rewrites every link to a fixed width, regardless of real length
+    url_cost: 23
     prompt_addendum: |
       Formato Twitter/X:
-      - Máximo 280 caracteres incluyendo la URL
       - Usa 2-4 hashtags relevantes (#Rust, #RustLang, etc.)
       - Sé conciso y directo
-      - La URL cuenta como 23 caracteres
 
   linkedin:
     max_chars: 3000
     prompt_addendum: |
       Formato LinkedIn:
-      - Máximo 3000 caracteres
       - Tono más profesional y detallado
       - Incluye un párrafo introductorio enganchador
       - Usa saltos de línea para legibilidad
@@ -58,7 +57,6 @@ platforms:
     max_chars: 300
     prompt_addendum: |
       Formato Bluesky:
-      - Máximo 300 caracteres incluyendo la URL
       - Similar a Twitter pero ligeramente más largo
       - No uses hashtags tradicionales (Bluesky no los soporta igual)
       - Sé conversacional y auténtico
@@ -67,7 +65,6 @@ platforms:
     max_chars: 4096
     prompt_addendum: |
       Formato Telegram:
-      - Máximo 4096 caracteres
       - Puedes usar formato Markdown: *negrita*, _cursiva_, `código`
       - Incluye un resumen atractivo del artículo
       - Invita a unirse a la comunidad si es relevante
@@ -75,9 +72,9 @@ platforms:
 
   instagram:
     max_chars: 2200
+    include_url: false
     prompt_addendum: |
       Formato Instagram:
-      - Máximo 2200 caracteres
       - Tono visual y evocador: describe la experiencia, no solo el contenido
       - Usa saltos de línea para separar ideas
       - Incluye entre 5 y 10 hashtags relevantes al final (#Rust, #RustLang, #Programacion, etc.)

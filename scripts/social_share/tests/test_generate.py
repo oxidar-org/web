@@ -10,7 +10,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from main import _generate_messages
 
 POST = {"title": "Rust en DebConf 26", "url": "https://oxidar.org/post/"}
-CONFIG = {"platforms": {"bluesky": {"max_chars": 50}, "telegram": {"max_chars": 4096}}}
+# include_url is off here so these cases exercise the length rules in isolation;
+# URL reservation has its own suite in test_url_budget.py.
+CONFIG = {
+    "platforms": {
+        "bluesky": {"max_chars": 50, "include_url": False},
+        "telegram": {"max_chars": 4096, "include_url": False},
+    }
+}
 
 
 class FakeAI:
