@@ -50,8 +50,13 @@ def _generate_messages(posts: list[dict], ai, config: dict, platform_names: list
                 text = ai.generate(post, platform_name, config)
                 max_chars = config.get("platforms", {}).get(platform_name, {}).get("max_chars", FALLBACK_MAX_CHARS)
                 if len(text) > max_chars:
-                    logger.warning("Text for %s exceeds limit (%d), truncating", platform_name, max_chars)
-                    text = text[:max_chars]
+                    # Truncating cuts the trailing URL mid-string and publishes a
+                    # dead link. Drop the message instead and let review catch it.
+                    logger.error(
+                        "Text for %s/%s is %d chars, over the %d limit — dropping message",
+                        post["title"], platform_name, len(text), max_chars,
+                    )
+                    continue
                 messages.append({"post": post, "platform": platform_name, "text": text})
             except Exception as e:
                 logger.error("AI generation failed for %s/%s: %s", post["title"], platform_name, e)
