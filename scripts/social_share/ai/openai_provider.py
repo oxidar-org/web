@@ -22,11 +22,11 @@ class OpenAIProvider(AIProvider):
             raise ValueError("OPENAI_API_KEY environment variable is required")
         return cls(client=openai.OpenAI(api_key=api_key))
 
-    def generate(self, post: dict, platform_name: str, config: dict) -> str:
+    def generate(self, post: dict, platform_name: str, config: dict, feedback: str = "") -> str:
         ai_config = config.get("ai", {}).get("openai", {})
         model = ai_config.get("model", "gpt-4o")
         system_prompt = config.get("ai", {}).get("system_prompt", "")
-        user_prompt = build_user_prompt(post, platform_name, config)
+        user_prompt = build_user_prompt(post, platform_name, config, feedback)
 
         response = self._client.chat.completions.create(
             model=model,

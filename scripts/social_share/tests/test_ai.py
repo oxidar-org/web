@@ -40,9 +40,11 @@ class TestBuildUserPrompt:
         prompt = build_user_prompt(self.post, "twitter", self.config)
         assert "Rust y WebAssembly" in prompt
 
-    def test_includes_url(self):
+    def test_omits_url(self):
+        # The URL is appended after generation, not written by the model.
         prompt = build_user_prompt(self.post, "twitter", self.config)
-        assert "https://oxidar.org/wasm/" in prompt
+        assert "https://oxidar.org/wasm/" not in prompt
+        assert "NO incluyas ninguna URL" in prompt
 
     def test_includes_tags(self):
         prompt = build_user_prompt(self.post, "twitter", self.config)
@@ -51,7 +53,8 @@ class TestBuildUserPrompt:
 
     def test_includes_platform_rules(self):
         prompt = build_user_prompt(self.post, "twitter", self.config)
-        assert "280" in prompt
+        # The stated limit is the budget left after reserving the URL, not max_chars.
+        assert str(280 - len(self.post["url"]) - 2) in prompt
         assert "Sé conciso." in prompt
 
     def test_handles_missing_platform_config(self):

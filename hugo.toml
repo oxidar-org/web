@@ -85,6 +85,13 @@ name = "Contacto"
 url = "/contact/"
 title = "Únete a la comunidad"
 
+[[languages.es.menu.main]]
+weight = 5
+identifier = "events"
+name = "Eventos"
+url = "https://calendar.google.com/calendar/embed?src=c_ac1102f85b1a406dd0a442876323f149a9c72aa29381a26e2af2c82cabc28661%40group.calendar.google.com&ctz=America%2FArgentina%2FBuenos_Aires"
+title = "Calendario público de meets y eventos"
+
 # English Menu
 [[languages.en.menu.main]]
 weight = 1
@@ -113,6 +120,13 @@ identifier = "contact"
 name = "Contact"
 url = "/en/contact/"
 title = "Join the community"
+
+[[languages.en.menu.main]]
+weight = 5
+identifier = "events"
+name = "Events"
+url = "https://calendar.google.com/calendar/embed?src=c_ac1102f85b1a406dd0a442876323f149a9c72aa29381a26e2af2c82cabc28661%40group.calendar.google.com&ctz=America%2FArgentina%2FBuenos_Aires"
+title = "Public calendar of meets and events"
 
 [params]
 # site default theme ["auto", "light", "dark"]
@@ -257,6 +271,15 @@ enable = true
 paginate = 6
 
 # Social config about the author
+# Public Oxidar meets & events calendar (no built-in FixIt network, so a custom url + icon)
+[params.social.Calendar]
+weight = 9
+url = "https://calendar.google.com/calendar/embed?src=c_ac1102f85b1a406dd0a442876323f149a9c72aa29381a26e2af2c82cabc28661%40group.calendar.google.com&ctz=America%2FArgentina%2FBuenos_Aires"
+title = "Calendario de eventos"
+newtab = true
+[params.social.Calendar.icon]
+class = "fa-solid fa-calendar-days fa-fw"
+
 [params.social.LinkedIn]
 id = "oxidar-org"
 prefix = "https://linkedin.com/company/"

@@ -9,6 +9,7 @@ _AI_REGISTRY: dict[str, tuple[str, str]] = {
     "anthropic": (".anthropic_provider", "AnthropicProvider"),
     "openai": (".openai_provider", "OpenAIProvider"),
     "github_models": (".github_models_provider", "GitHubModelsProvider"),
+    "claude_cli": (".claude_cli_provider", "ClaudeCLIProvider"),
 }
 
 
