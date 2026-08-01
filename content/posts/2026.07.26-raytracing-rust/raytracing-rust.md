@@ -17,7 +17,7 @@ translationKey = "raytracing-rust"
 
 Gonzalo va a contar cómo fue meterse de lleno en Rust reescribiendo un ray tracer desarrollado originalmente en C++. A partir de esa experiencia, va a mostrar cómo fue el proceso de ir trasladando las ideas de un lenguaje al otro, y cómo el proyecto le permitió entender, en la práctica, conceptos como ownership, borrowing, type safety, mutabilidad, smart pointers y SIMD.
 
-Además va a traer benchmarks posta, para ver cuánto rendimiento se gana o se pierde al cambiar de lenguaje y al meterle más complejidad de diseño. Y va a cerrar con la pregunta que probablemente todos nos hicimos alguna vez: ¿vale la pena aprender Rust, o lo que realmente vale es lo que te enseña sobre programar en general?
+Además mostrará benchmarks, para ver cuánto rendimiento se gana o se pierde al cambiar de lenguaje y al meterle más complejidad de diseño. Y va a cerrar con la pregunta que probablemente todos nos hicimos alguna vez: ¿Vale la pena aprender Rust, o lo que realmente vale es lo que te enseña sobre programar en general?
 
 ## Cuándo y dónde
 
