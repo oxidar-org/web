@@ -11,7 +11,7 @@ translationKey = "rust-in-open-source"
 
 Estuvimos en **DebConf 26** presentando esta charla: **(Por qué|Quién|Dónde) Rust**. Durante décadas, la programación de sistemas de bajo nivel ha significado elegir entre seguridad y rendimiento. A medida que estos sistemas se vuelven más complejos, el impacto de los errores de memoria y los problemas de concurrencia no para de crecer. Esta charla analiza por qué Rust es bueno para el desarrollo de sistemas.
 
-{{< youtube IfWgf2Z_rSU >}}
+{{< youtube HYNE8HG4AFA >}}
 
 ## Descargar las slides
 
@@ -29,7 +29,7 @@ Las slides incluyen:
 
 ## Quién lo está usando realmente
 
-**Hernán González** continúa con quién lo está usando realmente. Rust ya está en el **kernel de Linux**, y organizaciones como **Google, Microsoft y Canonical** lo utilizan en producción. Estos no son experimentos: demuestran que el lenguaje está listo para el tipo de infraestructura que mantenemos todos los días.
+**Hernán G. Gonzalez** continúa con quién lo está usando realmente. Rust ya está en el **kernel de Linux**, y organizaciones como **Google, Microsoft y Canonical** lo utilizan en producción. Estos no son experimentos: demuestran que el lenguaje está listo para el tipo de infraestructura que mantenemos todos los días.
 
 ## Cómo involucrarse
 
@@ -42,7 +42,4 @@ Finalmente, hablamos sobre cómo involucrarse. La comunidad de Rust es activa y 
 ### Formas de participar:
 - **Únete a nuestras discusiones** en [Telegram](https://t.me/+7PgAQVPclxIzOGQ0)
 - **Explora los proyectos** en nuestro [GitHub](https://github.com/oxidar-org)
-- **Comparte tu experiencia** con Rust y open-source
-- **Propón mejoras** a través de issues y PRs
-
-*Para más proyectos y colaboraciones, visita nuestro [GitHub](https://github.com/oxidar-org) y únete a nuestra [comunidad](https://t.me/+7PgAQVPclxIzOGQ0).*
+- **Seguí nuestros eventos** en el [calendario público de Oxidar](https://calendar.google.com/calendar/embed?src=c_ac1102f85b1a406dd0a442876323f149a9c72aa29381a26e2af2c82cabc28661%40group.calendar.google.com&ctz=America%2FArgentina%2FBuenos_Aires) - *Nuestras charlas son abiertas, son siempre bienvenidos a participar!*

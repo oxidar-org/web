@@ -11,7 +11,7 @@ translationKey = "rust-in-open-source"
 
 We were at **DebConf 26** presenting this talk: **(Why|Who|Where) Rust**. For decades, low-level systems programming has meant choosing between safety and performance. As these systems become more complex, the impact of memory errors and concurrency issues keeps growing. This talk explores why Rust is good for systems development. The talk was given in Spanish.
 
-{{< youtube IfWgf2Z_rSU >}}
+{{< youtube HYNE8HG4AFA >}}
 
 ## Download the Slides
 
@@ -29,7 +29,7 @@ The slides include:
 
 ## Who Is Actually Using It
 
-**Hernán González** takes over with who's actually using it. Rust is already in the **Linux kernel**, and organizations like **Google, Microsoft, Canonical, Discord, and Cloudflare** run it in production. These aren't experiments, they show the language is ready for exactly the kind of infrastructure we maintain every day.
+**Hernán G. Gonzalez** takes over with who's actually using it. Rust is already in the **Linux kernel**, and organizations like **Google, Microsoft, Canonical, Discord, and Cloudflare** run it in production. These aren't experiments, they show the language is ready for exactly the kind of infrastructure we maintain every day.
 
 ## How to Get Involved
 
@@ -42,7 +42,4 @@ Are you interested in the talk or want to keep learning about Rust? The **Oxidar
 ### Ways to Participate:
 - **Join our discussions** on [Telegram](https://t.me/+7PgAQVPclxIzOGQ0)
 - **Explore the projects** on our [GitHub](https://github.com/oxidar-org)
-- **Share your experience** with Rust and open source
-- **Propose improvements** through issues and PRs
-
-*For more projects and collaborations, visit our [GitHub](https://github.com/oxidar-org) and join our [community](https://t.me/+7PgAQVPclxIzOGQ0).*
+- **Follow our events** on the [public Oxidar calendar](https://calendar.google.com/calendar/embed?src=c_ac1102f85b1a406dd0a442876323f149a9c72aa29381a26e2af2c82cabc28661%40group.calendar.google.com&ctz=America%2FArgentina%2FBuenos_Aires) - *Our talks are open, you're always welcome to join!*
