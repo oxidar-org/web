@@ -42,8 +42,10 @@ def _github_headers() -> dict:
 def _generate_messages(posts: list[dict], ai, config: dict, platform_names: list[str]) -> list[dict]:
     """Generate messages for each post × platform. Returns list of {post, platform, text}."""
     messages = []
+    attempts = 0
     for post in posts:
         for platform_name in platform_names:
+            attempts += 1
             try:
                 text = ai.generate(post, platform_name, config)
                 max_chars = config.get("platforms", {}).get(platform_name, {}).get("max_chars", FALLBACK_MAX_CHARS)
@@ -53,6 +55,17 @@ def _generate_messages(posts: list[dict], ai, config: dict, platform_names: list
                 messages.append({"post": post, "platform": platform_name, "text": text})
             except Exception as e:
                 logger.error("AI generation failed for %s/%s: %s", post["title"], platform_name, e)
+
+    failures = attempts - len(messages)
+    if attempts and not messages:
+        # Every call failed — almost always a dead/misconfigured AI provider.
+        # Exit non-zero so CI surfaces it instead of reporting a green no-op.
+        logger.error(
+            "All %d AI generation attempt(s) failed — check AI_PROVIDER and its credentials.", attempts
+        )
+        sys.exit(1)
+    if failures:
+        logger.warning("%d of %d AI generation attempt(s) failed", failures, attempts)
     return messages
 
 
