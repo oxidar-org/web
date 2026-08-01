@@ -43,6 +43,28 @@ You can also find us on our **Discord server**:
 
 ### **[🎮 Join Oxidar's Discord](https://discord.gg/EMpekX7en)**
 
+### 📱 Quick access with QR Code
+
+<div style="text-align: center; margin: 20px 0;">
+  <img src="/images/discord-qr.png" alt="QR Code to join Oxidar's Discord" style="max-width: 250px; border: 2px solid #ddd; border-radius: 10px; padding: 10px;">
+  <p><em>Scan this QR code with your phone to join the Discord server</em></p>
+</div>
+
+---
+
+## 📅 Upcoming meets & events
+
+Our talks and meets are open — you're always welcome to join!
+
+{{< calendar >}}
+
+### **[🗓️ Add the calendar to your Google Calendar](https://calendar.google.com/calendar/embed?src=c_ac1102f85b1a406dd0a442876323f149a9c72aa29381a26e2af2c82cabc28661%40group.calendar.google.com&ctz=America%2FArgentina%2FBuenos_Aires)**
+
+<div style="text-align: center; margin: 20px 0;">
+  <img src="/images/calendar-qr.png" alt="QR Code to open Oxidar's events calendar" style="max-width: 250px; border: 2px solid #ddd; border-radius: 10px; padding: 10px;">
+  <p><em>Scan this QR code with your phone to take the calendar with you</em></p>
+</div>
+
 ---
 
 ## 📧 Other ways to contact us
@@ -54,71 +76,6 @@ For general inquiries, collaboration proposals, or administrative matters:
 ### Social media
 - **GitHub**: [@oxidar-org](https://github.com/oxidar-org)
 - **LinkedIn**: [Oxidar](https://linkedin.com/company/oxidar-org)
-- **Discord**: [Oxidar](https://discord.gg/EMpekX7en)
-
----
-
-## 🤝 How can you participate?
-
-The **Oxidar** community is made up of those who participate. You don't need any formal requirements to join:
-
-### For developers
-- Share your Rust projects
-- Help other members with technical questions
-- Participate in code reviews and collaborations
-- Propose and lead workshops or talks
-
-### For students and beginners
-- Ask questions and learn from the community
-- Share your learning progress
-- Participate in group projects to practice
-- Help translate resources to Spanish
-
-### For organizers
-- Propose and coordinate local events
-- Help with meetup logistics
-- Connect with other tech communities
-- Contribute to communication and outreach
-
-### For content creators
-- Write articles and tutorials
-- Create educational videos
-- Translate official documentation
-- Share learning resources
-
----
-
-## 🌟 Community values
-
-By joining **Oxidar**, you commit to:
-
-- **Respect** all people, regardless of their technical level
-- **Collaborate** constructively and supportively
-- **Include** and welcome new members
-- **Share** knowledge openly and freely
-- **Maintain** a safe and friendly environment for everyone
-
----
-
-## 📝 Code of Conduct
-
-**Oxidar** adheres to a **Code of Conduct** that puts respect, inclusion, and fair treatment at the center. We do not tolerate discriminatory, abusive, or violent attitudes.
-
-By participating in any of our spaces (Telegram, events, repositories), you agree to follow these community guidelines.
-
----
-
-## 🚀 Get started today!
-
-Ready to be part of the most active Rust community in Latin America?
-
-### **[📲 Join Telegram now](https://t.me/+7PgAQVPclxIzOGQ0)**
-
-Once inside, don't forget to:
-1. **Introduce** yourself briefly
-2. **Share** your interest in Rust
-3. **Read** the pinned messages
-4. **Participate** in conversations
 
 ---
 

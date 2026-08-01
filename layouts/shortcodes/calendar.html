@@ -1,0 +1,37 @@
+{{- /* Public Oxidar meets & events calendar.
+       Usage: {{< calendar >}} — optional named params: height, mode.
+       Example: {{< calendar height="500" mode="MONTH" >}} */ -}}
+{{- $calendarId := "c_ac1102f85b1a406dd0a442876323f149a9c72aa29381a26e2af2c82cabc28661@group.calendar.google.com" -}}
+{{- $lang := cond (eq .Site.Language.Lang "en") "en" "es" -}}
+{{- $heading := cond (eq $lang "en") "Upcoming meets & events" "Próximos meets y eventos" -}}
+{{- $height := .Get "height" | default "450" -}}
+{{- $query := dict
+  "src" $calendarId
+  "ctz" "America/Argentina/Buenos_Aires"
+  "hl" $lang
+  "mode" (.Get "mode" | default "AGENDA")
+  "showTitle" "0"
+  "showPrint" "0"
+  "showTabs" "0"
+  "showCalendars" "0"
+  "showTz" "0"
+-}}
+{{- $pairs := slice -}}
+{{- range $key, $value := $query -}}
+  {{- $pairs = $pairs | append (printf "%v=%v" $key (urlquery $value)) -}}
+{{- end -}}
+{{- $url := printf "https://calendar.google.com/calendar/embed?%v" (delimit (sort $pairs) "&") -}}
+
+<div class="calendar-embed">
+  <iframe
+    src="{{ $url }}"
+    title="{{ $heading }}"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    style="border: 0"
+    width="100%"
+    height="{{ $height }}"
+    frameborder="0"
+    scrolling="no"
+  ></iframe>
+</div>
