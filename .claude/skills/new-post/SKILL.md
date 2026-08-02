@@ -56,6 +56,7 @@ Good posts at Oxidar:
 - Explain *why* this matters to the Rust / LatAm community
 - Include code snippets when relevant (use fenced code blocks with language hint)
 - End with a call to action or community invitation
+- **Include at least one image** (a flyer, diagram, screenshot, or relevant photo) placed near the top of the post. The `social-share` workflow pulls from post images to generate share cards, so a post with no image at all makes for a weak social post. Save images under `static/images/posts/slug/` and reference them as `/images/posts/slug/filename.png`. If the user hasn't provided one, ask if they have an image (e.g. a flyer) before finishing, or suggest what kind of image would fit.
 
 ## Step 3 — Draft social media content
 
