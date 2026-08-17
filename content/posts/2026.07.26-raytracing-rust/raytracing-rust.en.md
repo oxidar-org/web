@@ -12,9 +12,9 @@ translationKey = "raytracing-rust"
 
 <img src="/images/posts/raytracing-rust/flyer.png" alt="From C++ to Rust: rewriting a Ray Tracer - event flyer" style="width:100%; max-width:450px; margin: 20px auto; display: block;">
 
-## Watch the talk
+## Watch it live
 
-Missed it or want to watch it again? Here's the full recording of the talk (given in Spanish):
+Can't make it to Tandil? Follow the talk live via streaming:
 
 {{< youtube LK7T9MsoluA >}}
 
