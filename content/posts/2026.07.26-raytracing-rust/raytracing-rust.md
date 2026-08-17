@@ -13,6 +13,12 @@ translationKey = "raytracing-rust"
 
 <img src="/images/posts/raytracing-rust/flyer.png" alt="De C++ a Rust: reescribiendo un Ray Tracer - flyer del evento" style="width:100%; max-width:450px; margin: 20px auto; display: block;">
 
+## Revive la charla
+
+¿Te la perdiste o querés volver a verla? Te dejamos la grabación completa de la charla:
+
+{{< youtube LK7T9MsoluA >}}
+
 ## La charla: De C++ a Rust, reescribiendo un Ray Tracer
 
 Gonzalo contará cómo fue meterse de lleno en Rust reescribiendo un ray tracer desarrollado originalmente en C++. A partir de esa experiencia, mostrará cómo fue el proceso de ir trasladando las ideas de un lenguaje al otro, y cómo el proyecto le permitió entender, en la práctica, conceptos como ownership, borrowing, type safety, mutabilidad, smart pointers y SIMD.
