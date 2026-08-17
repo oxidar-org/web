@@ -12,12 +12,6 @@ translationKey = "raytracing-rust"
 
 <img src="/images/posts/raytracing-rust/flyer.png" alt="From C++ to Rust: rewriting a Ray Tracer - event flyer" style="width:100%; max-width:450px; margin: 20px auto; display: block;">
 
-## Watch it live
-
-Can't make it to Tandil? Follow the talk live via streaming:
-
-{{< youtube LK7T9MsoluA >}}
-
 ## The talk: From C++ to Rust, rewriting a Ray Tracer
 
 Gonzalo will share what it was like to dive deep into Rust by rewriting a ray tracer originally developed in C++. Based on that experience, he will show the process of transferring ideas from one language to the other, and how the project helped him understand, in practice, concepts like ownership, borrowing, type safety, mutability, smart pointers, and SIMD.
@@ -38,3 +32,9 @@ The event is organized together with **José M. Massa** and UNICEN as an electiv
 We published the event on our **Oxidar public calendar**, so you can add it directly to your Google Calendar without needing an invite: [view the event](https://calendar.google.com/calendar/embed?src=c_ac1102f85b1a406dd0a442876323f149a9c72aa29381a26e2af2c82cabc28661%40group.calendar.google.com&ctz=America%2FArgentina%2FBuenos_Aires).
 
 If you’re in Tandil or nearby, we’re looking forward to seeing you. And if you can’t attend in person, you’ll be able to follow along via streaming. If you have any questions, write to us at admin@oxidar.org or join our [Telegram](https://t.me/+7PgAQVPclxIzOGQ0).
+
+## Watch it live
+
+Can't make it to Tandil? Follow the talk live via streaming:
+
+{{< youtube LK7T9MsoluA >}}
