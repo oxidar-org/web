@@ -13,9 +13,9 @@ translationKey = "raytracing-rust"
 
 <img src="/images/posts/raytracing-rust/flyer.png" alt="De C++ a Rust: reescribiendo un Ray Tracer - flyer del evento" style="width:100%; max-width:450px; margin: 20px auto; display: block;">
 
-## Revive la charla
+## Seguila en vivo
 
-¿Te la perdiste o querés volver a verla? Te dejamos la grabación completa de la charla:
+¿No podés llegar hasta Tandil? Seguí la charla en vivo por streaming:
 
 {{< youtube LK7T9MsoluA >}}
 
