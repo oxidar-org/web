@@ -3,12 +3,12 @@ date = '2026-07-26T10:00:00-03:00'
 draft = false
 hiddenFromHomePage = false
 title = "From C++ to Rust: Rewriting a Ray Tracer, talk at UNICEN Tandil"
-description = "Gonzalo Dicosimo presents how he rewrote a ray tracer from C++ to Rust, on August 27th at UNICEN in Tandil. Hybrid talk, open to the entire community."
+description = "Gonzalo Dicosimo presents how he rewrote a ray tracer from C++ to Rust, on September 10th at UNICEN in Tandil. Hybrid talk, open to the entire community."
 tags = ["rust", "presentation", "community"]
 categories = ["Events"]
 translationKey = "raytracing-rust"
 +++
-**On August 27th we'll be in Tandil** with a talk about one of those projects that any Rustacean will love: rewriting a ray tracer that started in C++ and ended up, line by line, converted into Rust.
+**On September 10th we'll be in Tandil** with a talk about one of those projects that any Rustacean will love: rewriting a ray tracer that started in C++ and ended up, line by line, converted into Rust.
 
 <img src="/images/posts/raytracing-rust/flyer.png" alt="From C++ to Rust: rewriting a Ray Tracer - event flyer" style="width:100%; max-width:450px; margin: 20px auto; display: block;">
 
@@ -20,7 +20,7 @@ He will also bring real benchmarks to see how much performance is gained or lost
 
 ## When and where
 
-- **Date**: Thursday, August 27, 2026
+- **Date**: Thursday, September 10, 2026
 - **Time**: 5:00 PM to 7:00 PM (Argentina)
 - **Location**: Library Auditorium, Faculty of Exact Sciences, UNICEN, Tandil ([view on Google Maps](https://www.google.com/maps/search/?api=1&query=UNICEN+Campus+Universitario+B7000+Tandil+Buenos+Aires))
 - **Format**: hybrid, in-person and streaming
