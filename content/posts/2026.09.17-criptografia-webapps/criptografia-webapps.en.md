@@ -14,7 +14,7 @@ translationKey = "criptografia-webapps"
 
 ## The Talks
 
-### 1. Custodian-free, decentralized secret recovery
+### 1. Secret Recovery without a Centralized Custodian
 
 Facundo La Rocca will tell us how DeRec solves the problem of the lost *seed phrase*, with Rust at its core. In this presentation, he'll explain how decentralized secret recovery works without relying on custodians or intermediaries.
 
@@ -25,10 +25,11 @@ Fernando Pastorelli will present a talk about a framework built on top of Axum t
 ## When and Where
 
 - **Date**: October 8, 2026
-- **Time**: 6:00 PM to 7:00 PM (Argentina)
+- **Time**: 6:00 PM to 8:00 PM (Argentina)
 - **Location**: Ualá Argentina offices, Av. Coronel Marcelino E. Freyre 3650
 Buenos Aires, CABA.
 - **Format**: hybrid, in-person and streaming
+- **Admission**: free and open, with snacks to share
 - **Registration**: Click [here](https://luma.com/qp0knhdd) to register on Luma!
 
 This is an activity open to the entire community.

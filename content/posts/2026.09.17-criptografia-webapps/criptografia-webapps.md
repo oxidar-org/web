@@ -15,7 +15,7 @@ translationKey = "criptografia-webapps"
 
 ## Las charlas
 
-### 1. Recuperación de secretos sin custodios y de forma descentralizada
+### 1. Recuperación de Secretos sin Custodio centralizado
 
 Facundo La Rocca nos va a contar cómo DeRec resuelve el problema de la *seed phrase* perdida, con Rust en el core. En esta presentación explicará cómo funciona la recuperación de secretos descentralizada sin depender de custodios ni intermediarios.
 
@@ -26,10 +26,11 @@ Fernando Pastorelli presentará una charla sobre un framework construido sobre A
 ## Cuándo y dónde
 
 - **Fecha**: 08 de Octubre, 2026
-- **Horario**: 18:00 a 19:00 hs (Argentina)
+- **Horario**: 18:00 a 20:00 hs (Argentina)
 - **Lugar**: Oficinas de Ualá Argentina, Av. Coronel Marcelino E. Freyre 3650
 Buenos Aires, CABA.
 - **Modalidad**: híbrida, presencial y por streaming
+- **Entrada**: libre y gratuita, con snacks para compartir
 - **Registro**: Click [aquí](https://luma.com/qp0knhdd) para registrarte en luma!
 
 Es una actividad abierta a toda la comunidad.
