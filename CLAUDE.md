@@ -232,6 +232,12 @@ The site generates multiple output formats (configured in hugo.toml):
 - Supports multiple platforms with configurable formatting
 - Triggered by `social-share.yaml` and `social-share-publish.yaml` workflows
 
+### Event Flyers (`scripts/flyer/`)
+- Renders event flyers in the house style (1728x2304, Rust orange, QR to registration)
+- `generate_flyer.py <config.json>` - one JSON per event in `scripts/flyer/events/`
+- Commit both the JSON and the rendered image; never hand-edit a flyer
+- See the `event-flyer` skill in `.claude/skills/` for the authoring guide
+
 ### Shared Utilities (`scripts/shared/`)
 - `detect.py` - Detects new/modified posts via git diff
 - `ai/` - AI client factory for reuse across scripts

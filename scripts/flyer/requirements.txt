@@ -1,0 +1,4 @@
+pillow>=10.0
+segno>=1.6
+opencv-python-headless>=4.9   # QR read-back verification
+numpy>=1.26
