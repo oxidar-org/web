@@ -23,6 +23,9 @@ Facundo La Rocca nos va a contar cómo DeRec resuelve el problema de la *seed ph
 
 Fernando Pastorelli presentará una charla sobre un framework construido sobre Axum que ofrece macros, grandes abstracciones, configuración compartible y un sistema de plugins. El proyecto busca lograr un *ramp-up* rápido sin sacrificar el rendimiento, garantizando *cold starts* muy bajos.
 
+## El Quiz de Oxidar
+No te pierdas la competencia más agitada de la comunidad. Hay remeras y swag para los ganadores 😉!
+
 ## Cuándo y dónde
 
 - **Fecha**: 08 de Octubre, 2026
