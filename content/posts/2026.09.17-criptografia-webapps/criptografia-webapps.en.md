@@ -22,6 +22,9 @@ Facundo La Rocca will tell us how DeRec solves the problem of the lost *seed phr
 
 Fernando Pastorelli will present a talk about a framework built on top of Axum that offers macros, powerful abstractions, shareable configuration, and a plugin system. The project aims to achieve fast *ramp-up* without sacrificing performance, guaranteeing very low *cold starts*.
 
+## The Oxidar Quiz
+Don't miss the most buzzing competition in the community. There are t-shirts and swag for the winners 😉!
+
 ## When and Where
 
 - **Date**: October 8, 2026
