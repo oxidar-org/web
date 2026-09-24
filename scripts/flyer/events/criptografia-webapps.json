@@ -1,0 +1,36 @@
+{
+  "eyebrow": "MEETUP",
+  "title": "Criptografía y WebApps",
+  "subtitle": "dos charlas en Rust",
+  "talks": [
+    {
+      "label": "CHARLA 01",
+      "icon": "key",
+      "title": "Recuperación de Secretos sin Custodio centralizado",
+      "speaker": "Facundo La Rocca",
+      "topic": "· Rust en el core de DeRec"
+    },
+    {
+      "label": "CHARLA 02",
+      "icon": "nodes",
+      "title": "¿Y si Rust tuviera la ergonomía de Spring o NextJS?",
+      "speaker": "Fernando Pastorelli",
+      "topic": "· Nuevos frameworks web en Rust"
+    }
+  ],
+  "info": [
+    {"icon": "calendar", "strong": "Miércoles 8 de octubre", "weak": "18:00 a 20:00 hs"},
+    {"icon": "pin", "strong": "Ualá Argentina", "weak": "Av. Cnel. M. E. Freyre 3650, CABA"},
+    {"icon": "screen", "strong": "Presencial + streaming", "weak": "Entrada libre y con snacks"}
+  ],
+  "qr_url": "https://luma.com/qp0knhdd",
+  "qr_caption": ["Escaneá y", "registrate"],
+  "contacts": [
+    {"icon": "globe", "label": "oxidar.org"},
+    {"icon": "mail", "label": "admin@oxidar.org"},
+    {"icon": "telegram", "label": "t.me/+7PgAQVPclxIzOGQ0"}
+  ],
+  "host": {"label": "NOS RECIBE", "logo": "scripts/flyer/assets/partner-uala.png"},
+  "footer_right": ["Comunidad Rust de Latinoamérica", "Buenos Aires · 2026"],
+  "output": "static/images/posts/criptografia-webapps/flyer.jpeg"
+}
