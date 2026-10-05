@@ -38,4 +38,4 @@ Si estás en Tandil o alrededores, te esperamos. Y si no podés ir presencial, v
 
 ¿No podés llegar hasta Tandil? Seguí la charla en vivo por streaming:
 
-{{< youtube LK7T9MsoluA >}}
+{{< youtube 4HSapIeFD6o >}}
