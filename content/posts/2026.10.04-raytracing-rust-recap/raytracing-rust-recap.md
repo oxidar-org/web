@@ -13,15 +13,18 @@ Estuvimos en la **UNICEN de Tandil** presentando esta charla: **De C++ a Rust: r
 
 {{< youtube 4HSapIeFD6o >}}
 
-## Lo que recorre la charla
+## Descargar las slides
 
-![Repasando el proyecto en pantalla durante la charla](/images/posts/raytracing-rust-recap/presentacion-pantalla.jpg)
+![Un momento de la charla en el auditorio de la UNICEN](/images/posts/raytracing-rust-recap/presentacion-pantalla.jpg)
 
-- **El proceso de traducción**, idea por idea, de un lenguaje al otro
-- **Ownership, borrowing, type safety, mutabilidad y smart pointers**, entendidos en un proyecto real y no en un ejercicio
-- **Benchmarks** de las dos implementaciones: cuánto rendimiento se gana o se pierde al cambiar de lenguaje, y cuánto cuesta sumarle complejidad de diseño
-- **SIMD**, que en un ray tracer es terreno fértil
-- Y el cierre, que da vuelta la premisa: *¿vale la pena aprender Rust, o lo que realmente vale es lo que te enseña sobre programar en general?*
+[**Descargar slides de la presentación (PDF)**](/slides/raytracing-rust.pdf)
+
+Las slides incluyen:
+- Cómo funciona un path tracer: el rayo, el viewport, el pixel grid, el antialiasing y la *Bounding Volume Hierarchy*
+- Por qué Rust y no C++, comparados punto por punto en rendimiento, portabilidad, estándar, seguridad, toolchain y memoria
+- El mismo código en los dos lenguajes, lado a lado: estructuras, colecciones, *new types*, polimorfismo y mutabilidad
+- Los benchmarks completos sobre una Cornell box, con el perfil de release, SIMD y Rayon
+- Y el cierre, que da vuelta la premisa: *¿me conviene aprender Rust?*
 
 ![El auditorio de la UNICEN durante la charla](/images/posts/raytracing-rust-recap/apertura-agenda.jpg)
 
