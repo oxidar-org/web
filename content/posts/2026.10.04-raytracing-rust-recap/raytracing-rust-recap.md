@@ -1,6 +1,6 @@
 +++
 date = '2026-10-04T10:00:00-03:00'
-draft = true
+draft = false
 hiddenFromHomePage = false
 title = 'Un ray tracer en Tandil: así fue la charla en UNICEN'
 description = "Gonzalo Dicosimo reescribió un ray tracer de C++ a Rust: ownership, borrowing, smart pointers, SIMD y benchmarks de las dos implementaciones."
