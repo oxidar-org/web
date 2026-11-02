@@ -1,19 +1,19 @@
 {
   "eyebrow": "WORKSHOP",
-  "title": "Embeddings en Rust",
+  "title": "Rust Embebido",
   "subtitle": "Bariloche + Santa Fe + online",
   "talks": [
     {
       "label": "PARTE 01",
       "icon": "screen",
-      "title": "Qué son los embeddings y para qué sirven",
+      "title": "Rust sin sistema operativo: no_std y microcontroladores",
       "speaker": "Sesión de aprendizaje",
       "topic": "· alrededor de 1 hora"
     },
     {
       "label": "PARTE 02",
-      "icon": "nodes",
-      "title": "Manos a la obra en Rust",
+      "icon": "chip",
+      "title": "Manos a la obra con el hardware",
       "speaker": "Starter kit de INVAP",
       "topic": "· pensado para quienes recién empiezan"
     },
@@ -43,5 +43,5 @@
     "logos": ["scripts/flyer/assets/partner-invap.png", "scripts/flyer/assets/partner-unl.png"]
   },
   "footer_right": ["Comunidad Rust de Latinoamérica", "Bariloche · Santa Fe · 2026"],
-  "output": "static/images/posts/embeddings-workshop/flyer.jpeg"
+  "output": "static/images/posts/rust-embebido/flyer.jpeg"
 }

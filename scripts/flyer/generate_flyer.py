@@ -242,6 +242,18 @@ class Flyer:
         self.line([cx, cy + s * 0.18, cx, cy + s * 0.36], col, w)
         self.line([cx - s * 0.24, cy + s * 0.38, cx + s * 0.24, cy + s * 0.38], col, w)
 
+    def _icon_chip(self, cx, cy, s, col):
+        w, b = max(1, int(s * 0.09)), s * 0.27
+        self.rrect([cx - b, cy - b, cx + b, cy + b], s * 0.06, outline=col, width=w)
+        self.rrect([cx - b * 0.42, cy - b * 0.42, cx + b * 0.42, cy + b * 0.42],
+                   s * 0.03, fill=col)
+        for t in (-0.5, 0, 0.5):
+            p = t * b
+            self.line([cx + p, cy - b, cx + p, cy - s * 0.46], col, w)
+            self.line([cx + p, cy + b, cx + p, cy + s * 0.46], col, w)
+            self.line([cx - b, cy + p, cx - s * 0.46, cy + p], col, w)
+            self.line([cx + b, cy + p, cx + s * 0.46, cy + p], col, w)
+
     def _icon_globe(self, cx, cy, s, col):
         w, r = max(1, int(s * 0.085)), s * 0.40
         self.ellipse([cx - r, cy - r, cx + r, cy + r], outline=col, width=w)
