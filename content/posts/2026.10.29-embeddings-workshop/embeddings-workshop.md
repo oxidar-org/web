@@ -1,6 +1,6 @@
 +++
 date = '2026-10-29T10:00:00-03:00'
-draft = true
+draft = false
 hiddenFromHomePage = false
 title = 'Workshop de Embeddings en Rust: Bariloche, Santa Fe y online'
 description = "El sábado 5 de diciembre hacemos un workshop de embeddings en Rust en dos sedes a la vez: Bariloche, con el equipo de INVAP, y Santa Fe, con la Universidad Nacional del Litoral. También se puede seguir online."
