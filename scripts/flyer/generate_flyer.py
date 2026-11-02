@@ -62,6 +62,7 @@ GOOGLE_FONTS = {
 STRIPE_H = 34
 CREDIT_H = 118
 FOOT_H = 236
+CONTACT_LINE_H = 56         # one-line contacts strip, used when there are two QRs
 DIVIDER_Y = 664
 
 # Tried in order; the first that fits the page wins. The first entry is the
@@ -99,6 +100,7 @@ class Flyer:
         self.base = base
         self.fonts = fetch_fonts()
         self._cache: dict = {}
+        self.qr_checks: list = []   # (box, url) per QR drawn, for read-back
         self.img = Image.new('RGB', (W * SS, H * SS), PAPER)
         self.dr = ImageDraw.Draw(self.img)
 
@@ -240,6 +242,18 @@ class Flyer:
         self.line([cx, cy + s * 0.18, cx, cy + s * 0.36], col, w)
         self.line([cx - s * 0.24, cy + s * 0.38, cx + s * 0.24, cy + s * 0.38], col, w)
 
+    def _icon_chip(self, cx, cy, s, col):
+        w, b = max(1, int(s * 0.09)), s * 0.27
+        self.rrect([cx - b, cy - b, cx + b, cy + b], s * 0.06, outline=col, width=w)
+        self.rrect([cx - b * 0.42, cy - b * 0.42, cx + b * 0.42, cy + b * 0.42],
+                   s * 0.03, fill=col)
+        for t in (-0.5, 0, 0.5):
+            p = t * b
+            self.line([cx + p, cy - b, cx + p, cy - s * 0.46], col, w)
+            self.line([cx + p, cy + b, cx + p, cy + s * 0.46], col, w)
+            self.line([cx - b, cy + p, cx - s * 0.46, cy + p], col, w)
+            self.line([cx + b, cy + p, cx + s * 0.46, cy + p], col, w)
+
     def _icon_globe(self, cx, cy, s, col):
         w, r = max(1, int(s * 0.085)), s * 0.40
         self.ellipse([cx - r, cy - r, cx + r, cy + r], outline=col, width=w)
@@ -324,7 +338,8 @@ class Flyer:
             self.info_h = 40 + d['row_h'] * len(self.cfg['info'])
 
             self.credit_top = H - STRIPE_H - 30 - CREDIT_H
-            self.foot_top = self.credit_top - d['gap'] - FOOT_H
+            strip = CONTACT_LINE_H + d['gap'] // 2 if 'qrs' in self.cfg else 0
+            self.foot_top = self.credit_top - d['gap'] - strip - FOOT_H
             self.info_top = self.foot_top - d['gap'] - self.info_h
             stack = len(talks) * self.card_h + (len(talks) - 1) * 34
             self.cards_top = self.info_top - d['gap'] - stack
@@ -384,17 +399,25 @@ class Flyer:
                 self.text((x + 24, cy + 1), row['weak'], self.font('body', 36),
                           MUTED, anchor='lm')
 
-    def draw_footer(self):
-        top, qr_w = self.foot_top, 560
-        self.rrect([M, top, M + qr_w, top + FOOT_H], 30, fill=ORANGE)
+    def qr_block(self, x, w, url):
+        """Orange block with the QR on a white card; returns where text starts."""
+        top = self.foot_top
+        self.rrect([x, top, x + w, top + FOOT_H], 30, fill=ORANGE)
         buf = io.BytesIO()
-        segno.make(self.cfg['qr_url'], error='h').save(
+        segno.make(url, error='h').save(
             buf, kind='png', scale=20, border=2, dark='#262626', light='#ffffff')
         qr = Image.open(io.BytesIO(buf.getvalue())).convert('RGBA')
         card = FOOT_H - 56
-        self.rrect([M + 28, top + 28, M + 28 + card, top + 28 + card], 16, fill=WHITE)
-        self.paste(qr, card - 20, (M + 38, top + 38))
-        tx = M + 28 + card + 30
+        self.rrect([x + 28, top + 28, x + 28 + card, top + 28 + card], 16, fill=WHITE)
+        self.paste(qr, card - 20, (x + 38, top + 38))
+        self.qr_checks.append(([x, top, x + w, top + FOOT_H], url))
+        return x + 28 + card + 30
+
+    def draw_footer(self):
+        if 'qrs' in self.cfg:
+            return self.draw_qr_pair()
+        top, qr_w = self.foot_top, 560
+        tx = self.qr_block(M, qr_w, self.cfg['qr_url'])
         for i, ln in enumerate(self.cfg['qr_caption']):
             self.text((tx, top + FOOT_H / 2 + (i - 0.5) * 52), ln,
                       self.font('bold', 38), WHITE, anchor='lm')
@@ -409,13 +432,43 @@ class Flyer:
             self.text((cx0 + 110, cy + 1), c['label'], self.font('bold', 34), INK,
                       anchor='lm')
 
+    def draw_qr_pair(self):
+        """Two registration QRs side by side (e.g. one per venue), contacts below."""
+        top, gap = self.foot_top, 30
+        w = (CW - gap) / 2
+        for i, q in enumerate(self.cfg['qrs']):
+            x = M + i * (w + gap)
+            tx = self.qr_block(x, w, q['url'])
+            max_w = x + w - 28 - tx
+            self.text((tx, top + FOOT_H / 2 - 30), q['title'],
+                      self.fit('display', q['title'], 54, max_w), WHITE, anchor='lm')
+            if q.get('caption'):
+                self.text((tx, top + FOOT_H / 2 + 34), q['caption'],
+                          self.fit('semi', q['caption'], 30, max_w), WHITE, anchor='lm')
+
+        # contacts collapse to one centred line under the QR blocks
+        cy = top + FOOT_H + self.d['gap'] // 2 + CONTACT_LINE_H / 2
+        f, sep = self.font('bold', 32), 56
+        items = self.cfg['contacts']
+        total = sum(46 + self.measure(c['label'], f) for c in items) + sep * (len(items) - 1)
+        x = W / 2 - total / 2
+        for c in items:
+            self.icon(c['icon'], x + 17, cy, 36)
+            x += 46
+            self.text((x, cy + 1), c['label'], f, INK, anchor='lm')
+            x += self.measure(c['label'], f) + sep
+
     def draw_credit(self):
         cy = self.credit_top + 26
         host = self.cfg.get('host')
         if host:
             self.tracked((M, cy - 26), host['label'], self.font('bold', 26), MUTED, 7)
-            logo = self.asset(host['logo'])
-            self.paste(logo, logo.size[0] * 96 / logo.size[1], (M, cy + 4))
+            x = M
+            for rel in host.get('logos', [host.get('logo')]):
+                logo = self.asset(rel)
+                w = logo.size[0] * 96 / logo.size[1]
+                self.paste(logo, w, (x, cy + 4))
+                x += w + 48
         right = self.cfg.get('footer_right', [])
         for i, ln in enumerate(right):
             style = ('semi', 32, MUTED) if i == 0 else ('body', 30, LIGHT)
@@ -439,18 +492,24 @@ class Flyer:
         return out
 
 
-def verify_qr(path: Path, expected: str) -> bool:
-    """Read the QR back out of the finished JPEG. Never ship an unscannable QR."""
+def verify_qr(path: Path, checks: list) -> bool:
+    """Read each QR back out of the finished JPEG. Never ship an unscannable QR.
+
+    Each QR is decoded from its own block, so two QRs can't be confused.
+    """
     try:
         import cv2
         import numpy as np
     except ImportError:
         print('  ! opencv not installed - QR NOT verified')
         return False
-    a = np.array(Image.open(path).convert('RGB'))[:, :, ::-1].copy()
-    got = cv2.QRCodeDetector().detectAndDecode(a)[0]
-    ok = got == expected
-    print(f'  QR decodes to {got!r} - {"ok" if ok else "MISMATCH"}')
+    img = Image.open(path).convert('RGB')
+    ok = True
+    for box, expected in checks:
+        a = np.array(img.crop([int(v) for v in box]))[:, :, ::-1].copy()
+        got = cv2.QRCodeDetector().detectAndDecode(a)[0]
+        ok &= got == expected
+        print(f'  QR decodes to {got!r} - {"ok" if got == expected else "MISMATCH"}')
     return ok
 
 
@@ -463,8 +522,9 @@ def main():
     cfg = json.loads(args.config.read_text())
     out = args.output or (REPO / cfg['output'])
     print(f'rendering {out.relative_to(REPO) if out.is_relative_to(REPO) else out}')
-    Flyer(cfg, args.config.resolve().parent).render(out)
-    verify_qr(out, cfg['qr_url'])
+    flyer = Flyer(cfg, args.config.resolve().parent)
+    flyer.render(out)
+    verify_qr(out, flyer.qr_checks)
     print(f'  wrote {out} ({out.stat().st_size // 1024} KB)')
 
 

@@ -37,10 +37,11 @@ the JPEG — the JSON is what makes the next correction a one-line edit.
 | `talks[]` | `label`, `icon`, `title`, `speaker`, `topic` — 1 to 3 talks |
 | `info[]` | `icon`, `strong`, `weak` — date, venue, format |
 | `qr_url` | Registration link, verified by reading it back out of the JPEG |
-| `host` | Optional `label` + `logo` partner credit |
+| `qrs[]` | Instead of `qr_url`/`qr_caption`: two `{url, title, caption}` blocks side by side (e.g. one per venue); contacts drop to one line below. See `rust-embebido.json` |
+| `host` | Optional `label` + `logo` partner credit, or `logos[]` for several partners |
 | `footer_right` | Two muted lines, bottom right |
 
-Icons: `key` `nodes` `calendar` `clock` `pin` `screen` `globe` `mail` `telegram`
+Icons: `key` `nodes` `chip` `calendar` `clock` `pin` `screen` `globe` `mail` `telegram`
 
 ## Rules
 
