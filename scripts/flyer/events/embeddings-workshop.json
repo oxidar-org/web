@@ -1,0 +1,47 @@
+{
+  "eyebrow": "WORKSHOP",
+  "title": "Embeddings en Rust",
+  "subtitle": "Bariloche + Santa Fe + online",
+  "talks": [
+    {
+      "label": "PARTE 01",
+      "icon": "screen",
+      "title": "Qué son los embeddings y para qué sirven",
+      "speaker": "Sesión de aprendizaje",
+      "topic": "· alrededor de 1 hora"
+    },
+    {
+      "label": "PARTE 02",
+      "icon": "nodes",
+      "title": "Manos a la obra en Rust",
+      "speaker": "Starter kit de INVAP",
+      "topic": "· pensado para quienes recién empiezan"
+    },
+    {
+      "label": "PARTE 03",
+      "icon": "key",
+      "title": "El clásico quiz de Oxidar",
+      "speaker": "Trivia de Rust",
+      "topic": "· como en cada evento"
+    }
+  ],
+  "info": [
+    {"icon": "calendar", "strong": "Sábado 5 de diciembre", "weak": "11:00 a 18:00 hs"},
+    {"icon": "screen", "strong": "También online", "weak": "YouTube + emulador, a tu ritmo"}
+  ],
+  "qrs": [
+    {"url": "https://luma.com/a46vcdf4", "title": "Bariloche", "caption": "INVAP · lugar a confirmar"},
+    {"url": "https://luma.com/s6xjsts6", "title": "Santa Fe", "caption": "Universidad Nacional del Litoral"}
+  ],
+  "contacts": [
+    {"icon": "globe", "label": "oxidar.org"},
+    {"icon": "mail", "label": "admin@oxidar.org"},
+    {"icon": "telegram", "label": "t.me/+7PgAQVPclxIzOGQ0"}
+  ],
+  "host": {
+    "label": "SEDES A CARGO DE",
+    "logos": ["scripts/flyer/assets/partner-invap.png", "scripts/flyer/assets/partner-unl.png"]
+  },
+  "footer_right": ["Comunidad Rust de Latinoamérica", "Bariloche · Santa Fe · 2026"],
+  "output": "static/images/posts/embeddings-workshop/flyer.jpeg"
+}
