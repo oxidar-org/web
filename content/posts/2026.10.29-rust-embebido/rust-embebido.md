@@ -3,13 +3,13 @@ date = '2026-10-29T10:00:00-03:00'
 draft = false
 hiddenFromHomePage = false
 title = 'Workshop de Rust Embebido: Bariloche, Santa Fe y online'
-description = "El sábado 5 de diciembre hacemos un workshop de Rust embebido en dos sedes a la vez: Bariloche, con el equipo de INVAP, y Santa Fe, con la Universidad Nacional del Litoral. También se puede seguir online."
+description = "El sábado 12 de diciembre hacemos un workshop de Rust embebido en dos sedes a la vez: Bariloche, con el equipo de INVAP, y Santa Fe, con la Universidad Nacional del Litoral. También se puede seguir online."
 tags = ["rust", "embebidos", "no_std", "microcontroladores", "workshop"]
 categories = ["Eventos", "Comunidad"]
 translationKey = "rust-embebido"
 +++
 
-**El sábado 5 de diciembre Oxidar se multiplica**: hacemos un workshop de Rust embebido en dos ciudades al mismo tiempo, **Bariloche** y **Santa Fe**, y para quienes no puedan acercarse, también se va a poder seguir online.
+**El sábado 12 de diciembre Oxidar se multiplica**: hacemos un workshop de Rust embebido en dos ciudades al mismo tiempo, **Bariloche** y **Santa Fe**, y para quienes no puedan acercarse, también se va a poder seguir online.
 
 <img src="/images/posts/rust-embebido/flyer.jpeg" alt="Workshop de Rust Embebido - flyer del evento" style="width:100%; max-width:450px; margin: 20px auto; display: block;">
 
@@ -51,7 +51,7 @@ La dinámica es parecida a la del [hackathon que hicimos en Buenos Aires](/snake
 
 ### 📋 Detalles del evento
 
-* **Fecha:** sábado 5 de diciembre de 2026
+* **Fecha:** sábado 12 de diciembre de 2026
 * **Horario:** 11:00 a 18:00 hs (Argentina)
 * **Sedes:** Bariloche (INVAP, lugar a confirmar) y Santa Fe (Universidad Nacional del Litoral)
 * **Online:** YouTube + emulador autoguiado
@@ -69,4 +69,4 @@ Para seguirlo online no hace falta inscribirse.
 
 Cualquier duda, escribinos a admin@oxidar.org o sumate a nuestro [Telegram](https://t.me/+7PgAQVPclxIzOGQ0).
 
-**¡Nos vemos el 5 de diciembre, en Bariloche, en Santa Fe o del otro lado de la pantalla!**
+**¡Nos vemos el 12 de diciembre, en Bariloche, en Santa Fe o del otro lado de la pantalla!**
