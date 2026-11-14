@@ -3,12 +3,12 @@ date = '2026-10-29T10:00:00-03:00'
 draft = false
 hiddenFromHomePage = false
 title = "Embedded Rust Workshop: Bariloche, Santa Fe, and Online"
-description = "On Saturday, December 5, we're holding an embedded Rust workshop at two venues at once: Bariloche, with the INVAP team, and Santa Fe, with the Universidad Nacional del Litoral. You can also follow along online."
+description = "On Saturday, December 12, we're holding an embedded Rust workshop at two venues at once: Bariloche, with the INVAP team, and Santa Fe, with the Universidad Nacional del Litoral. You can also follow along online."
 tags = ["rust", "embedded", "no_std", "microcontrollers", "workshop"]
 categories = ["Events", "Community"]
 translationKey = "rust-embebido"
 +++
-**On Saturday, December 5th, Oxidar multiplies**: we're running an embedded Rust workshop in two cities at the same time, **Bariloche** and **Santa Fe**, and for those who can't make it in person, it will also be possible to follow along online.
+**On Saturday, December 12th, Oxidar multiplies**: we're running an embedded Rust workshop in two cities at the same time, **Bariloche** and **Santa Fe**, and for those who can't make it in person, it will also be possible to follow along online.
 
 <img src="/images/posts/rust-embebido/flyer.jpeg" alt="Embedded Rust Workshop - event flyer" style="width:100%; max-width:450px; margin: 20px auto; display: block;">
 
@@ -50,7 +50,7 @@ You can participate too! We'll stream on **YouTube**, and you'll be able to foll
 
 ### 📋 Event details
 
-* **Date:** Saturday, December 5, 2026
+* **Date:** Saturday, December 12, 2026
 * **Time:** 11:00 to 18:00 (Argentina)
 * **Venues:** Bariloche (INVAP, location to be confirmed) and Santa Fe (Universidad Nacional del Litoral)
 * **Online:** YouTube + self-guided emulator
@@ -68,4 +68,4 @@ No registration is needed to follow along online.
 
 If you have any questions, write to us at admin@oxidar.org or join our [Telegram](https://t.me/+7PgAQVPclxIzOGQ0).
 
-**See you on December 5th, in Bariloche, in Santa Fe, or on the other side of the screen!**
+**See you on December 12th, in Bariloche, in Santa Fe, or on the other side of the screen!**
